@@ -1,2 +1,2 @@
-pokerstats
-==========
+README for pokerstats
+=====================
