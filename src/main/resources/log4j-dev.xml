@@ -12,7 +12,7 @@
 	</appender>
 
 	<!-- Application logger -->
-	<logger name="com.avrios.dispatch">
+	<logger name="ch.rogerjaeggi.pokerstats">
 		<level value="debug" />
 	</logger>
 
