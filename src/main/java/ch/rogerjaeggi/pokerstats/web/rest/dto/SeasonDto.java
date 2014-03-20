@@ -1,11 +1,17 @@
 package ch.rogerjaeggi.pokerstats.web.rest.dto;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class FooDto {
+public class SeasonDto {
 
-    private String bar;
+    private String uuid;
+
+    private String name;
+
+    private boolean current;
+
 }

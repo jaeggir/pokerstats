@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -18,7 +18,7 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"ch.rogerjaeggi.pokerstats.web.rest"}, useDefaultFilters = false,
-        includeFilters = { @ComponentScan.Filter(type = FilterType.ANNOTATION, value = RestController.class) })
+        includeFilters = { @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class) })
 public class ServletConfiguration extends WebMvcConfigurerAdapter {
 
     @Autowired
