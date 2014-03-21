@@ -20,6 +20,8 @@ public class TournamentResultMapper {
             dto.setPoints(result.getPoints());
             dto.setRank(result.getRank());
             dto.setTournamentUuid(result.getTournamentUuid());
+            dto.setAnte(result.getAnte());
+            dto.setWin(result.getWin());
             dtos.add(dto);
         }
         return dtos;

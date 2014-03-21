@@ -42,6 +42,8 @@ create table T_TOURNAMENT_RESULT (
     _PLAYER varchar(255),
     _POINTS integer,
     _RANK integer,
+    _ANTE integer,
+    _WIN integer,
     _TOURNAMENT varchar(255),
     _UPDATED timestamp,
     primary key (_UUID)

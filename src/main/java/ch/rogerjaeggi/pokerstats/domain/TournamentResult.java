@@ -34,6 +34,12 @@ public class TournamentResult extends BaseEntity {
     @Column(name = "_POINTS")
     private Integer points;
 
+    @Column(name = "_ANTE")
+    private Integer ante;
+
+    @Column(name = "_WIN")
+    private Integer win;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "_ELIMINATED_BY")
     private Player eliminatedBy;

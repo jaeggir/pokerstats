@@ -34,13 +34,16 @@ controllers.controller('PlayerController', function PlayersController($scope, $r
 
     $scope.results = [];
     $scope.averageRank;
+    $scope.averageWin = 0;
     PlayerResults.query({uuid: $routeParams.uuid}).$promise.then(function (results) {
 
         var rankSummary = 0;
+        var winSummary = 0;
         var values = [];
         angular.forEach(results, function (result, index) {
-            values.push([index + 1, result.rank]);
+            values.push([index + 1, -result.ante + result.win]);
             rankSummary += result.rank;
+            winSummary += -result.ante + result.win;
         });
         $scope.results = [
             {
@@ -49,6 +52,7 @@ controllers.controller('PlayerController', function PlayersController($scope, $r
             }
         ];
         $scope.averageRank = Math.round(rankSummary / results.length * 100) / 100;
+        $scope.averageWin = Math.round(winSummary / results.length * 100) / 100;
     });
 
 });

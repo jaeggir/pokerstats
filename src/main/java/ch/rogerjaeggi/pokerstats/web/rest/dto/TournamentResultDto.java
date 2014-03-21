@@ -23,4 +23,8 @@ public class TournamentResultDto {
     private String eliminatedByPlayerUuid;
 
     private long updated;
+
+    private int ante;
+
+    private int win;
 }
