@@ -9,10 +9,7 @@ import ch.rogerjaeggi.pokerstats.web.rest.mapper.SeasonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -31,14 +28,27 @@ public class SeasonController {
     private EventRepository eventRepository;
 
     @RequestMapping(value = "/1.0/season", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody SeasonDto getCurrentSeason(HttpServletResponse response) {
-        log.debug("REST request to get current season");
-        Season season = seasonRepository.getCurrentSeason();
-        if (season == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return null;
+    public @ResponseBody List<SeasonDto> getCurrentSeason(
+            HttpServletResponse response,
+            @RequestParam(value = "filter", required = false) String filter) {
+
+        if ("current".equals(filter)) {
+            log.debug("REST request to get the current season");
+            Season season = seasonRepository.getCurrentSeason();
+            if (season == null) {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                return null;
+            }
+            return SeasonMapper.toDto(season);
+        } else {
+            log.debug("REST request to get all seasons");
+            List<Season> seasons = seasonRepository.getAll();
+            if (seasons == null) {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                return null;
+            }
+            return SeasonMapper.toDto(seasons);
         }
-        return SeasonMapper.toDto(season);
     }
 
     @RequestMapping(value = "/1.0/season/{seasonUuid}", method = RequestMethod.GET, produces = "application/json")
