@@ -20,7 +20,7 @@ var pokerstatsApp = angular.module('pokerstatsApp', [
 pokerstatsApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {templateUrl: 'views/main.html', controller: 'MainController'});
     $routeProvider.when('/players', {templateUrl: 'views/players.html', controller: 'PlayersController'});
-    $routeProvider.otherwise({redirectTo: '/players'});
+    $routeProvider.otherwise({redirectTo: '/'});
 }]);
 
 pokerstatsApp.factory('playersResource', function($resource) {
