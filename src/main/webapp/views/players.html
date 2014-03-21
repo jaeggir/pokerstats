@@ -3,9 +3,7 @@
         <div class="col-md-12">
 
             <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">Spieler</div>
-
+                <div class="panel-heading"><h3>Spieler</h3></div>
                 <table class="table">
                     <thead>
                         <th>#</th>
@@ -19,9 +17,9 @@
                         <td>{{player.uuid}}</td>
                         <td>{{player.nickname}}</td>
                         <td>{{player.guest}}</td>
-                        <td>{{player.birthday | date:'dd.MM.yyyy'}}</td>
-                        <td>{{player.joined | date:'dd.MM.yyyy'}}</td>
-                        <td>{{player.updated | date:'dd.MM.yyyy hh:mm'}}</td>
+                        <td>{{player.birthday | defaultDate}}</td>
+                        <td>{{player.joined | defaultDate}}</td>
+                        <td>{{player.updated | defaultDateTime}}</td>
                     </tr>
                 </table>
             </div>

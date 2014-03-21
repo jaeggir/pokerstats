@@ -3,6 +3,7 @@
 angular.module('pokerstatsApp.controllers', []);
 angular.module('pokerstatsApp.directives', []);
 angular.module('pokerstatsApp.services', []);
+angular.module('pokerstatsApp.filters', []);
 
 var pokerstatsApp = angular.module('pokerstatsApp', [
     'ngResource',
@@ -11,7 +12,8 @@ var pokerstatsApp = angular.module('pokerstatsApp', [
 
     'pokerstatsApp.controllers',
     'pokerstatsApp.directives',
-    'pokerstatsApp.services'
+    'pokerstatsApp.services',
+    'pokerstatsApp.filters'
 
 ]);
 

@@ -24,9 +24,10 @@
             <div class="header">
                 <ul class="nav nav-pills pull-right" data-navbar>
                     <li data-match-route="/">
-                        <a href="#/">
-                            <span class="glyphicon glyphicon-home"></span>&nbsp;Home
-                        </a>
+                        <a href="#/"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+                    </li>
+                    <li data-match-route="/players">
+                        <a href="#/players"><span class="glyphicon glyphicon-tower"></span>&nbsp;Spieler</a>
                     </li>
                 </ul>
                 <h3 class="text-muted">Pokerstats</h3>
@@ -46,10 +47,13 @@
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/momentjs/moment.js"></script>
+        <script src="bower_components/momentjs/lang/de.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers.js"></script>
         <script src="scripts/services.js"></script>
         <script src="scripts/directives.js"></script>
+        <script src="scripts/filters.js"></script>
         <!-- endbuild -->
 </body>
 </html>
