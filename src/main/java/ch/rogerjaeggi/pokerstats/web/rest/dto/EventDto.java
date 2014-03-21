@@ -12,6 +12,8 @@ public class EventDto {
 
     private String name;
 
+    private String hostPlayerUuid;
+
     private long date;
 
     private long updated;

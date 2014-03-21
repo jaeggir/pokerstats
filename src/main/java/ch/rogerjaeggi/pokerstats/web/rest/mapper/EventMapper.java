@@ -12,6 +12,7 @@ public class EventMapper {
         dto.setName(event.getName());
         dto.setDate(event.getDate().toDateTimeAtStartOfDay().getMillis());
         dto.setUpdated(event.getUpdated().toDateTime().getMillis());
+        dto.setHostPlayerUuid(event.getHostPlayerUuid());
         return dto;
     }
 }

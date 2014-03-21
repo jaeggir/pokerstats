@@ -36,12 +36,12 @@ public class Event extends BaseEntity {
     //@Column(name = "venueId", updatable = false, insertable = false)
     //private Long venueId;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "host")
-    //private Player host;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "_HOST")
+    private Player host;
 
-    //@Column(name = "host", updatable = false, insertable = false)
-    //private Long hostPlayerId;
+    @Column(name = "_HOST", updatable = false, insertable = false)
+    private String hostPlayerUuid;
 
     //@OneToMany(mappedBy = "event")
     //private List<Tournament> tournaments;
