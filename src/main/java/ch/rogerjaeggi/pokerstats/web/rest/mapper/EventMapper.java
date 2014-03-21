@@ -16,6 +16,7 @@ public class EventMapper {
         dto.setUpdated(event.getUpdated().toDateTime().getMillis());
         dto.setHostPlayerUuid(event.getHostPlayerUuid());
         dto.setVenueUuid(event.getVenueUuid());
+        dto.setSeasonUuid(event.getSeasonUuid());
         dto.setTournaments(tournaments);
         return dto;
     }

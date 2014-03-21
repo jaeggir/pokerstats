@@ -14,6 +14,8 @@ public class EventDto {
 
     private String uuid;
 
+    private String seasonUuid;
+
     private String hostPlayerUuid;
 
     private String venueUuid;

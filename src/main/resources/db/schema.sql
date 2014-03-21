@@ -10,7 +10,7 @@ create table T_EVENT (
     _DATE date,
     _NAME varchar(255),
     _HOST varchar(255),
-    _SEASON bigint,
+    _SEASON varchar(255),
     _UPDATED timestamp,
     _VENUE varchar(255),
     primary key (_UUID)

@@ -13,3 +13,9 @@ filters.filter('defaultDateTime', function defaultDateTime() {
         return moment(dateString).format('Do MMMM YYYY, h:mm');
     };
 });
+
+filters.filter('filterBySeason', function filterBySeason() {
+    return function (season) {
+        return season;
+    };
+});

@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3>{{event.name}}</h3>
+        <div data-ng-repeat="season in seasons | orderBy:'-name'">
+            <strong>{{season.name}}</strong>
+            <ul data-ng-repeat="event in events | orderBy:'-date'">
+                <li data-ng-if="event.seasonUuid === season.uuid">
+                    <a data-ng-href="#/event/{{event.uuid}}">{{event.name}} ({{event.date | defaultDate}})</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

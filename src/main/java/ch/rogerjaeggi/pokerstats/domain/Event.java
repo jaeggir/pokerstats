@@ -21,7 +21,7 @@ public class Event extends BaseEntity {
     private Season season;
 
     @Column(name = "_SEASON", updatable = false, insertable = false)
-    private Long seasonId;
+    private String seasonUuid;
 
     @Column(name = "_NAME")
     private String name;

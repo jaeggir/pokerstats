@@ -95,16 +95,15 @@ controllers.controller('VenueController', function VenueController($scope, $rout
 
 });
 
-controllers.controller('TournamentController', function TournamentController($scope, $routeParams, Tournament,
-                                                                             TournamentResults) {
+controllers.controller('EventsController', function EventsController($scope, $routeParams, Seasons, Events) {
 
-    $scope.tournament = {};
-    $scope.results = [];
-    Tournament.get({uuid: $routeParams.uuid}).$promise.then(function (tournament) {
-        $scope.tournament = tournament;
-        TournamentResults.query({uuid: tournament.uuid}).$promise.then(function (results) {
-            $scope.results = results;
-        });
+    $scope.seasons = {};
+    $scope.events = {};
+    Seasons.query().$promise.then(function (seasons) {
+        $scope.seasons = seasons;
+    });
+    Events.query().$promise.then(function (events) {
+        $scope.events = events;
     });
 
 });

@@ -21,6 +21,7 @@ var pokerstatsApp = angular.module('pokerstatsApp', [
 pokerstatsApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {templateUrl: 'views/main.html', controller: 'MainController'});
     $routeProvider.when('/players', {templateUrl: 'views/players.html', controller: 'PlayersController'});
+    $routeProvider.when('/events', {templateUrl: 'views/events.html', controller: 'EventsController'});
     $routeProvider.when('/player/:uuid', {templateUrl: 'views/player.html', controller: 'PlayerController'});
     $routeProvider.when('/event/:uuid', {templateUrl: 'views/event.html', controller: 'EventController'});
     $routeProvider.when('/venue/:uuid', {templateUrl: 'views/venue.html', controller: 'VenueController'});
