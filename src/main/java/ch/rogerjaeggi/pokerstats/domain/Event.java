@@ -30,12 +30,12 @@ public class Event extends BaseEntity {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate date;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "venueId")
-    //private Venue venue;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "_VENUE")
+    private Venue venue;
 
-    //@Column(name = "venueId", updatable = false, insertable = false)
-    //private Long venueId;
+    @Column(name = "_VENUE", updatable = false, insertable = false)
+    private String venueUuid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "_HOST")

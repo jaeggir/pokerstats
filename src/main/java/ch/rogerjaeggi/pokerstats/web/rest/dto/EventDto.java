@@ -12,9 +12,11 @@ public class EventDto {
 
     private String uuid;
 
-    private String name;
-
     private String hostPlayerUuid;
+
+    private String venueUuid;
+
+    private String name;
 
     private long date;
 
