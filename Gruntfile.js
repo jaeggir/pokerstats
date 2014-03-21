@@ -49,34 +49,14 @@ module.exports = function (grunt) {
     },
     connect: {
       proxies: [
-        {
-          context: '/app',
-          host: 'localhost',
-          port: 8080,
-          https: false,
-          changeOrigin: false
-        },
-        {
-          context: '/metrics',
-          host: 'localhost',
-          port: 8080,
-          https: false,
-          changeOrigin: false
-        },
-        {
-        context: '/dump',
-        host: 'localhost',
-        port: 8080,
-        https: false,
-        changeOrigin: false
-        },
-        {
-          context: '/console',
-          host: 'localhost',
-          port: 8080,
-          https: false,
-          changeOrigin: false
-         }
+          {
+              context: '/rest',
+              host: 'localhost',
+              port: 8080,
+              https: false,
+              changeOrigin: false,
+              xforward: false
+          }
       ],
       options: {
         port: 9000,
