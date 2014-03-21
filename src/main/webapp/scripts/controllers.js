@@ -52,9 +52,9 @@ controllers.controller('EventController', function EventController($scope, $rout
         });
         Tournaments.query().$promise.then(function (tournaments) {
             angular.forEach(tournaments, function (tournament) {
-               if ($scope.tournaments.indexOf(tournament.uuid) > -1) {
-                   $scope.tournament.push(tournament);
-               }
+                if ($scope.tournaments.indexOf(tournament.uuid) > -1) {
+                    $scope.tournament.push(tournament);
+                }
             });
             $scope.tournaments = tournaments;
         });
@@ -71,11 +71,15 @@ controllers.controller('VenueController', function VenueController($scope, $rout
 
 });
 
-controllers.controller('TournamentController', function TournamentController($scope, $routeParams, Tournament) {
+controllers.controller('TournamentController', function TournamentController($scope, $routeParams, Tournament, Result) {
 
     $scope.tournament = {};
-    Tournament.get({uuid: $routeParams.uuid}).$promise.then(function (venue) {
-        $scope.tournament = venue;
+    $scope.results = [];
+    Tournament.get({uuid: $routeParams.uuid}).$promise.then(function (tournament) {
+        $scope.tournament = tournament;
+        Result.query({uuid: tournament.uuid}).$promise.then(function (results) {
+            $scope.results = results;
+        });
     });
 
 });

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -53,7 +54,15 @@ public class TournamentController {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return null;
         }
-        return TournamentMapper.toDto(tournament);
+
+        List<String> results = new LinkedList<>();
+        for (TournamentResult result : tournamentResultRepository.getAllForTournament(tournamentUuid)) {
+            results.add(result.getUuid());
+        }
+
+        TournamentDto dto = TournamentMapper.toDto(tournament);
+        dto.setResults(results);
+        return dto;
     }
 
     @RequestMapping(value = "/1.0/tournament/{tournamentUuid}/result", method = RequestMethod.GET, produces = "application/json")
