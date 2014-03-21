@@ -1,5 +1,21 @@
 <div class="row">
     <div class="col-md-12">
         <h3>{{player.nickname}}</h3>
+
+        <h4>Stats</h4>
+        <strong>Durchschnittsrang: {{averageRank}}</strong>
+        <nvd3-line-chart
+                data="results"
+                id="exampleId"
+                xAxisTickFormat="xAxisTickFormatFunction()"
+                yAxisTickFormat="yAxisTickFormatFunction()"
+                width="550"
+                height="350"
+                showXAxis="true"
+                showYAxis="true"
+                noData="Keine Daten gefunden."
+                interactive="true">
+            <svg></svg>
+        </nvd3-line-chart>
     </div>
 </div>

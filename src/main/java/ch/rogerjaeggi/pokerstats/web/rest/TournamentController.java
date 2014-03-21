@@ -65,7 +65,7 @@ public class TournamentController {
         return dto;
     }
 
-    @RequestMapping(value = "/1.0/tournament/{tournamentUuid}/result", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/1.0/tournament/{tournamentUuid}/results", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<TournamentResultDto> getResults(@PathVariable String tournamentUuid, HttpServletResponse response) {
         log.debug("REST request to get tournament results: '{}'", tournamentUuid);

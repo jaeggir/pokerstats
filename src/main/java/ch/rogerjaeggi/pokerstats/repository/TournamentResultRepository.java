@@ -20,4 +20,10 @@ public class TournamentResultRepository extends JpaRepository<TournamentResult> 
         query.setParameter("tournamentUuid", tournamentUuid);
         return Collections.checkedList(query.getResultList(), TournamentResult.class);
     }
+
+    public List<TournamentResult> getAllForPlayer(String playerUuid) {
+        Query query = getEntityManager().createQuery("from TournamentResult where player.uuid=:playerUuid");
+        query.setParameter("playerUuid", playerUuid);
+        return Collections.checkedList(query.getResultList(), TournamentResult.class);
+    }
 }

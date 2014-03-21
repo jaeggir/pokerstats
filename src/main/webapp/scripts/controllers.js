@@ -24,11 +24,31 @@ controllers.controller('PlayersController', function PlayersController($scope, P
 
 });
 
-controllers.controller('PlayerController', function PlayersController($scope, $routeParams, Player) {
+controllers.controller('PlayerController', function PlayersController($scope, $routeParams, Player, PlayerResults) {
 
     $scope.player = {};
     Player.get({uuid: $routeParams.uuid }).$promise.then(function (player) {
         $scope.player = player;
+
+    });
+
+    $scope.results = [];
+    $scope.averageRank;
+    PlayerResults.query({uuid: $routeParams.uuid}).$promise.then(function (results) {
+
+        var rankSummary = 0;
+        var values = [];
+        angular.forEach(results, function (result, index) {
+            values.push([index + 1, result.rank]);
+            rankSummary += result.rank;
+        });
+        $scope.results = [
+            {
+                key: 'Results',
+                values: values
+            }
+        ];
+        $scope.averageRank = Math.round(rankSummary / results.length * 100) / 100;
     });
 
 });
@@ -71,13 +91,14 @@ controllers.controller('VenueController', function VenueController($scope, $rout
 
 });
 
-controllers.controller('TournamentController', function TournamentController($scope, $routeParams, Tournament, Result) {
+controllers.controller('TournamentController', function TournamentController($scope, $routeParams, Tournament,
+                                                                             TournamentResults) {
 
     $scope.tournament = {};
     $scope.results = [];
     Tournament.get({uuid: $routeParams.uuid}).$promise.then(function (tournament) {
         $scope.tournament = tournament;
-        Result.query({uuid: tournament.uuid}).$promise.then(function (results) {
+        TournamentResults.query({uuid: tournament.uuid}).$promise.then(function (results) {
             $scope.results = results;
         });
     });

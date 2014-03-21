@@ -1,9 +1,13 @@
 package ch.rogerjaeggi.pokerstats.web.rest;
 
 import ch.rogerjaeggi.pokerstats.domain.Player;
+import ch.rogerjaeggi.pokerstats.domain.TournamentResult;
 import ch.rogerjaeggi.pokerstats.repository.PlayerRepository;
+import ch.rogerjaeggi.pokerstats.repository.TournamentResultRepository;
 import ch.rogerjaeggi.pokerstats.web.rest.dto.PlayerDto;
+import ch.rogerjaeggi.pokerstats.web.rest.dto.TournamentResultDto;
 import ch.rogerjaeggi.pokerstats.web.rest.mapper.PlayerMapper;
+import ch.rogerjaeggi.pokerstats.web.rest.mapper.TournamentResultMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -23,6 +27,9 @@ public class PlayerController {
 
     @Inject
     private PlayerRepository playerRepository;
+
+    @Inject
+    private TournamentResultRepository tournamentResultRepository;
 
     @RequestMapping(value = "/1.0/player", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
@@ -46,5 +53,17 @@ public class PlayerController {
         }
 
         return PlayerMapper.toDto(player);
+    }
+
+    @RequestMapping(value = "/1.0/player/{playerUuid}/results", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody List<TournamentResultDto> getResults(@PathVariable String playerUuid, HttpServletResponse response) {
+        log.debug("REST request to get player : '{}'", playerUuid);
+        List<TournamentResult> results = tournamentResultRepository.getAllForPlayer(playerUuid);
+        if (results == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+
+        return TournamentResultMapper.toDto(results);
     }
 }

@@ -9,6 +9,7 @@ var pokerstatsApp = angular.module('pokerstatsApp', [
     'ngResource',
     'ngRoute',
     'ngCookies',
+    'nvd3ChartDirectives',
 
     'pokerstatsApp.controllers',
     'pokerstatsApp.directives',
@@ -63,6 +64,10 @@ pokerstatsApp.factory('Tournament', function ($resource) {
     return $resource('rest/1.0/tournament/:uuid');
 });
 
-pokerstatsApp.factory('Result', function ($resource) {
-    return $resource('rest/1.0/tournament/:uuid/result');
+pokerstatsApp.factory('TournamentResults', function ($resource) {
+    return $resource('rest/1.0/tournament/:uuid/results');
+});
+
+pokerstatsApp.factory('PlayerResults', function ($resource) {
+    return $resource('rest/1.0/player/:uuid/results');
 });
