@@ -8,7 +8,7 @@ controllers.controller('MainController', function MainController($scope, Seasons
     Seasons.query({filter: 'current'}).$promise.then(function (season) {
         $scope.season = season[0];
         angular.forEach($scope.season.events, function (eventUuid) {
-            Event.get({eventUuid: eventUuid}).$promise.then(function (event) {
+            Event.get({uuid: eventUuid}).$promise.then(function (event) {
                 $scope.events.push(event);
             });
         });
@@ -27,7 +27,7 @@ controllers.controller('PlayersController', function PlayersController($scope, P
 controllers.controller('PlayerController', function PlayersController($scope, $routeParams, Player) {
 
     $scope.player = {};
-    Player.get({playerUuid: $routeParams.uuid }).$promise.then(function (player) {
+    Player.get({uuid: $routeParams.uuid }).$promise.then(function (player) {
         $scope.player = player;
     });
 
@@ -38,12 +38,12 @@ controllers.controller('EventController', function EventController($scope, $rout
     $scope.event = {};
     $scope.venue = {};
     $scope.host = {};
-    Event.get({eventUuid: $routeParams.uuid}).$promise.then(function (event) {
+    Event.get({uuid: $routeParams.uuid}).$promise.then(function (event) {
         $scope.event = event;
-        Venue.get({venueUuid: event.venueUuid}).$promise.then(function (venue) {
+        Venue.get({uuid: event.venueUuid}).$promise.then(function (venue) {
             $scope.venue = venue;
         });
-        Player.get({playerUuid: event.hostPlayerUuid}).$promise.then(function (player) {
+        Player.get({uuid: event.hostPlayerUuid}).$promise.then(function (player) {
             $scope.host = player;
         });
     });
@@ -53,7 +53,7 @@ controllers.controller('EventController', function EventController($scope, $rout
 controllers.controller('VenueController', function VenueController($scope, $routeParams, Venue) {
 
     $scope.venue = {};
-    Venue.get({venueUuid: $routeParams.uuid}).$promise.then(function (venue) {
+    Venue.get({uuid: $routeParams.uuid}).$promise.then(function (venue) {
         $scope.venue = venue;
     });
 

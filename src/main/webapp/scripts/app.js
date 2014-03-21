@@ -31,7 +31,7 @@ pokerstatsApp.factory('Players', function($resource) {
 });
 
 pokerstatsApp.factory('Player', function($resource) {
-    return $resource('rest/1.0/player/:playerUuid');
+    return $resource('rest/1.0/player/:uuid');
 });
 
 pokerstatsApp.factory('Seasons', function($resource) {
@@ -43,7 +43,7 @@ pokerstatsApp.factory('Events', function($resource) {
 });
 
 pokerstatsApp.factory('Event', function($resource) {
-    return $resource('rest/1.0/event/:eventUuid');
+    return $resource('rest/1.0/event/:uuid');
 });
 
 pokerstatsApp.factory('Venues', function($resource) {
@@ -51,5 +51,5 @@ pokerstatsApp.factory('Venues', function($resource) {
 });
 
 pokerstatsApp.factory('Venue', function($resource) {
-    return $resource('rest/1.0/venue/:venueUuid');
+    return $resource('rest/1.0/venue/:uuid');
 });
