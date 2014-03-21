@@ -43,7 +43,7 @@ public class SeasonController {
 
     @RequestMapping(value = "/1.0/season/{seasonUuid}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody SeasonDto getSeason(@PathVariable String seasonUuid, HttpServletResponse response) {
-        log.debug("REST request to get season : {}", seasonUuid);
+        log.debug("REST request to get season : '{}'", seasonUuid);
         Season season = seasonRepository.getByUuid(seasonUuid);
         if (season == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);

@@ -28,7 +28,7 @@ public class EventController {
     @RequestMapping(value = "/1.0/event/", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<EventDto> getEvents(HttpServletResponse response) {
-        log.debug("REST request to get events");
+        log.debug("REST request to get all events");
         List<Event> events = eventRepository.getAll();
         if (events == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
