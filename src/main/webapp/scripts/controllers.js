@@ -24,6 +24,15 @@ controllers.controller('PlayersController', function PlayersController($scope, P
 
 });
 
+controllers.controller('PlayerController', function PlayersController($scope, $routeParams, Player) {
+
+    $scope.player = {};
+    Player.get({playerUuid: $routeParams.uuid }).$promise.then(function (player) {
+        $scope.player = player;
+    });
+
+});
+
 controllers.controller('EventController', function EventController($scope, $routeParams, Event, Venue, Player) {
 
     $scope.event = {};
@@ -37,6 +46,15 @@ controllers.controller('EventController', function EventController($scope, $rout
         Player.get({playerUuid: event.hostPlayerUuid}).$promise.then(function (player) {
             $scope.host = player;
         });
+    });
+
+});
+
+controllers.controller('VenueController', function VenueController($scope, $routeParams, Venue) {
+
+    $scope.venue = {};
+    Venue.get({venueUuid: $routeParams.uuid}).$promise.then(function (venue) {
+        $scope.venue = venue;
     });
 
 });
