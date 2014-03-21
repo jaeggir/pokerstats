@@ -17,5 +17,14 @@
     "strict": true,
     "trailing": true,
     "smarttabs": true,
-    "white": true
+    "white": true,
+    "globals": {
+        "$": false,
+        "angular": false,
+        "window": false,
+        "document": false,
+        "localStorage": false,
+        "google": false,
+        "moment": false
+    }
 }
