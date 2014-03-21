@@ -24,7 +24,7 @@ public class PlayerController {
     @Inject
     private PlayerRepository playerRepository;
 
-    @RequestMapping(value = "/1.0/player/", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/1.0/player", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<PlayerDto> getAllPlayers(HttpServletResponse response) {
         log.debug("REST request to get all players");

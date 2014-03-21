@@ -30,7 +30,7 @@ public class EventController {
     @Inject
     private TournamentRepository tournamentRepository;
 
-    @RequestMapping(value = "/1.0/event/", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/1.0/event", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<EventDto> getEvents(HttpServletResponse response) {
         log.debug("REST request to get all events");

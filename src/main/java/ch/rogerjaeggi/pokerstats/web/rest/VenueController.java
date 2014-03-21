@@ -24,7 +24,7 @@ public class VenueController {
     @Inject
     private VenueRepository venueRepository;
 
-    @RequestMapping(value = "/1.0/venue/", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/1.0/venue", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<VenueDto> getAllVenues(HttpServletResponse response) {
         log.debug("REST request to get all venues");

@@ -30,7 +30,7 @@ public class SeasonController {
     @Inject
     private EventRepository eventRepository;
 
-    @RequestMapping(value = "/1.0/season/", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/1.0/season", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody SeasonDto getCurrentSeason(HttpServletResponse response) {
         log.debug("REST request to get current season");
         Season season = seasonRepository.getCurrentSeason();

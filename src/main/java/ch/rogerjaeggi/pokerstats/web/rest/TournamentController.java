@@ -25,7 +25,7 @@ public class TournamentController {
     @Inject
     private TournamentRepository tournamentRepository;
 
-    @RequestMapping(value = "/1.0/tournament/", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/1.0/tournament", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<TournamentDto> getAllTournaments(HttpServletResponse response) {
         log.debug("REST request to get all tournaments");
