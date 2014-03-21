@@ -36,6 +36,17 @@ create table T_TOURNAMENT (
     primary key (_UUID)
 );
 
+create table T_TOURNAMENT_RESULT (
+    _UUID varchar(255) not null,
+    _ELIMINATED_BY varchar(255),
+    _PLAYER varchar(255),
+    _POINTS integer,
+    _RANK integer,
+    _TOURNAMENT varchar(255),
+    _UPDATED timestamp,
+    primary key (_UUID)
+);
+
 create table T_VENUE (
     _UUID varchar(255) not null,
     _CITY varchar(255),
@@ -56,3 +67,4 @@ alter table T_EVENT add constraint FK_44sa6b9uevtllgyf6988mkxjh foreign key (_SE
 alter table T_EVENT add constraint FK_4140ljluvj0x0j2r9fhsirxwn foreign key (_VENUE) references T_VENUE;
 alter table T_TOURNAMENT add constraint FK_cxfn1ad9687ab6frvhn35w61i foreign key (_EVENT) references T_EVENT;
 alter table T_TOURNAMENT add constraint FK_tn04myhwaxkg17ifnk9q40pis foreign key (_RESULT_SUBMITTED_BY) references T_PLAYER;
+alter table T_TOURNAMENT_RESULT add constraint FK_hql7dmrbxb0fee1l7s8mayfqc foreign key (_TOURNAMENT) references T_TOURNAMENT;

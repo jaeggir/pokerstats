@@ -6,6 +6,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,8 +27,8 @@ public class Tournament extends BaseEntity {
     @Column(name = "_STATUS")
     private Integer status;
 
-    //@OneToMany(mappedBy = "tournamentId")
-    //private List<TournamentResult> results;
+    @OneToMany(mappedBy = "tournamentUuid")
+    private List<TournamentResult> results;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "_RESULT_SUBMITTED_BY")

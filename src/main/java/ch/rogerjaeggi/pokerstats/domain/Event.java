@@ -44,7 +44,7 @@ public class Event extends BaseEntity {
     @Column(name = "_HOST", updatable = false, insertable = false)
     private String hostPlayerUuid;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "eventUuid")
     private List<Tournament> tournaments;
 
     @Column(name = "_UPDATED", insertable = false, updatable = false)

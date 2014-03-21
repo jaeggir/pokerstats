@@ -2,9 +2,13 @@ package ch.rogerjaeggi.pokerstats.web.rest;
 
 
 import ch.rogerjaeggi.pokerstats.domain.Tournament;
+import ch.rogerjaeggi.pokerstats.domain.TournamentResult;
 import ch.rogerjaeggi.pokerstats.repository.TournamentRepository;
+import ch.rogerjaeggi.pokerstats.repository.TournamentResultRepository;
 import ch.rogerjaeggi.pokerstats.web.rest.dto.TournamentDto;
+import ch.rogerjaeggi.pokerstats.web.rest.dto.TournamentResultDto;
 import ch.rogerjaeggi.pokerstats.web.rest.mapper.TournamentMapper;
+import ch.rogerjaeggi.pokerstats.web.rest.mapper.TournamentResultMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -24,6 +28,9 @@ public class TournamentController {
 
     @Inject
     private TournamentRepository tournamentRepository;
+
+    @Inject
+    private TournamentResultRepository tournamentResultRepository;
 
     @RequestMapping(value = "/1.0/tournament", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
@@ -47,5 +54,17 @@ public class TournamentController {
             return null;
         }
         return TournamentMapper.toDto(tournament);
+    }
+
+    @RequestMapping(value = "/1.0/tournament/{tournamentUuid}/result", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    List<TournamentResultDto> getResults(@PathVariable String tournamentUuid, HttpServletResponse response) {
+        log.debug("REST request to get tournament results: '{}'", tournamentUuid);
+        List<TournamentResult> results = tournamentResultRepository.getAllForTournament(tournamentUuid);
+        if (results == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+        return TournamentResultMapper.toDto(results);
     }
 }
