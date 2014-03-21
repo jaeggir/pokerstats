@@ -5,6 +5,7 @@ import ch.rogerjaeggi.pokerstats.repository.PlayerRepository;
 import ch.rogerjaeggi.pokerstats.web.rest.dto.PlayerDto;
 import ch.rogerjaeggi.pokerstats.web.rest.mapper.PlayerMapper;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ import java.util.List;
 @Controller
 public class PlayerController {
 
-    private final Logger log = org.slf4j.LoggerFactory.getLogger(PlayerController.class);
+    private final Logger log = LoggerFactory.getLogger(PlayerController.class);
 
     @Inject
     private PlayerRepository playerRepository;
