@@ -1,0 +1,30 @@
+<div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Spieler</div>
+
+                <table class="table">
+                    <thead>
+                        <th>#</th>
+                        <th>Nickname</th>
+                        <th>Gast</th>
+                        <th>Geburtsdatum</th>
+                        <th>Beitritt</th>
+                        <th>Letztes Update</th>
+                    </thead>
+                    <tr data-ng-repeat="player in players">
+                        <td>{{player.uuid}}</td>
+                        <td>{{player.nickname}}</td>
+                        <td>{{player.guest}}</td>
+                        <td>{{player.birthday | date:'dd.MM.yyyy'}}</td>
+                        <td>{{player.joined | date:'dd.MM.yyyy'}}</td>
+                        <td>{{player.updated | date:'dd.MM.yyyy hh:mm'}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
