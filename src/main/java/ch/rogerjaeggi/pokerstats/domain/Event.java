@@ -8,6 +8,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -43,8 +44,8 @@ public class Event extends BaseEntity {
     @Column(name = "_HOST", updatable = false, insertable = false)
     private String hostPlayerUuid;
 
-    //@OneToMany(mappedBy = "event")
-    //private List<Tournament> tournaments;
+    @OneToMany(mappedBy = "event")
+    private List<Tournament> tournaments;
 
     @Column(name = "_UPDATED", insertable = false, updatable = false)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")

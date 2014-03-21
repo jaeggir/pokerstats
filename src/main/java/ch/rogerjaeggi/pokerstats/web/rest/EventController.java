@@ -1,7 +1,9 @@
 package ch.rogerjaeggi.pokerstats.web.rest;
 
 import ch.rogerjaeggi.pokerstats.domain.Event;
+import ch.rogerjaeggi.pokerstats.domain.Tournament;
 import ch.rogerjaeggi.pokerstats.repository.EventRepository;
+import ch.rogerjaeggi.pokerstats.repository.TournamentRepository;
 import ch.rogerjaeggi.pokerstats.web.rest.dto.EventDto;
 import ch.rogerjaeggi.pokerstats.web.rest.mapper.EventMapper;
 import org.slf4j.Logger;
@@ -25,6 +27,9 @@ public class EventController {
     @Inject
     private EventRepository eventRepository;
 
+    @Inject
+    private TournamentRepository tournamentRepository;
+
     @RequestMapping(value = "/1.0/event/", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<EventDto> getEvents(HttpServletResponse response) {
@@ -36,7 +41,7 @@ public class EventController {
         }
         List<EventDto> dtos = new LinkedList<>();
         for (Event event : events) {
-            dtos.add(EventMapper.toDto(event));
+            dtos.add(EventMapper.toDto(event, null));
         }
         return dtos;
     }
@@ -50,7 +55,14 @@ public class EventController {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return null;
         }
-        return EventMapper.toDto(event);
+
+        // TODO Java 8 anyone?
+        List<Tournament> tournaments = tournamentRepository.getByEventUuid(event.getUuid());
+        List<String> tournamentUuids = new LinkedList<>();
+        for (Tournament tournament : tournaments) {
+            tournamentUuids.add(tournament.getUuid());
+        }
+        return EventMapper.toDto(event, tournamentUuids);
     }
 
 }
