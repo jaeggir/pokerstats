@@ -23,6 +23,18 @@ pokerstatsApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.otherwise({redirectTo: '/'});
 }]);
 
-pokerstatsApp.factory('playersResource', function($resource) {
+pokerstatsApp.factory('Players', function($resource) {
     return $resource('rest/1.0/player/');
+});
+
+pokerstatsApp.factory('Seasons', function($resource) {
+    return $resource('rest/1.0/season');
+});
+
+pokerstatsApp.factory('Events', function($resource) {
+    return $resource('rest/1.0/event/');
+});
+
+pokerstatsApp.factory('Event', function($resource) {
+    return $resource('rest/1.0/event/:eventUuid');
 });

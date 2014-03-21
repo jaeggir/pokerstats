@@ -39,7 +39,10 @@ public class SeasonController {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 return null;
             }
-            return SeasonMapper.toDto(season);
+            LinkedList<SeasonDto> seasons = new LinkedList<>();
+            SeasonDto dto = SeasonMapper.toDto(season, getEventUuids(season.getUuid()));
+            seasons.add(dto);
+            return seasons;
         } else {
             log.debug("REST request to get all seasons");
             List<Season> seasons = seasonRepository.getAll();
@@ -59,14 +62,18 @@ public class SeasonController {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return null;
         }
+        return SeasonMapper.toDto(season, getEventUuids(seasonUuid));
+    }
 
+    private List<String> getEventUuids(String seasonUuid) {
         // TODO map, Java8?
         List<Event> events = eventRepository.getBySeason(seasonUuid);
         List<String> eventUuids = new LinkedList<>();
         for (Event event : events) {
             eventUuids.add(event.getUuid());
         }
-
-        return SeasonMapper.toDto(season, eventUuids);
+        return eventUuids;
     }
+
+
 }

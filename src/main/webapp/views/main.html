@@ -1,9 +1,10 @@
 <div>
     <div class="row">
         <div class="col-md-12">
-            <h1>Welcome</h1>
-            <p class="lead">....lead...</p>
-            <p>...content...</p>
+            <h3>{{season.name}}</h3>
+            <div data-ng-repeat="event in events | orderBy:'-uuid'">
+                <a data-ng-href="#/event/{{event.uuid}}">{{event.name}} ({{event.tournaments.length}} Tournaments)</a>
+            </div>
         </div>
     </div>
 </div>
