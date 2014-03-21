@@ -23,6 +23,7 @@ pokerstatsApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/player/:uuid', {templateUrl: 'views/player.html', controller: 'PlayerController'});
     $routeProvider.when('/event/:uuid', {templateUrl: 'views/event.html', controller: 'EventController'});
     $routeProvider.when('/venue/:uuid', {templateUrl: 'views/venue.html', controller: 'VenueController'});
+    $routeProvider.when('/tournament/:uuid', {templateUrl: 'views/tournament.html', controller: 'TournamentController'});
     $routeProvider.otherwise({redirectTo: '/'});
 }]);
 
@@ -52,4 +53,12 @@ pokerstatsApp.factory('Venues', function($resource) {
 
 pokerstatsApp.factory('Venue', function($resource) {
     return $resource('rest/1.0/venue/:uuid');
+});
+
+pokerstatsApp.factory('Tournaments', function($resource) {
+    return $resource('rest/1.0/tournament/');
+});
+
+pokerstatsApp.factory('Tournament', function($resource) {
+    return $resource('rest/1.0/tournament/:uuid');
 });

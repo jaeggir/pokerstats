@@ -33,18 +33,30 @@ controllers.controller('PlayerController', function PlayersController($scope, $r
 
 });
 
-controllers.controller('EventController', function EventController($scope, $routeParams, Event, Venue, Player) {
+controllers.controller('EventController', function EventController($scope, $routeParams, Event, Venue, Player,
+                                                                   Tournaments) {
 
     $scope.event = {};
     $scope.venue = {};
     $scope.host = {};
+    $scope.tournaments = [];
     Event.get({uuid: $routeParams.uuid}).$promise.then(function (event) {
+
         $scope.event = event;
+
         Venue.get({uuid: event.venueUuid}).$promise.then(function (venue) {
             $scope.venue = venue;
         });
         Player.get({uuid: event.hostPlayerUuid}).$promise.then(function (player) {
             $scope.host = player;
+        });
+        Tournaments.query().$promise.then(function (tournaments) {
+            angular.forEach(tournaments, function (tournament) {
+               if ($scope.tournaments.indexOf(tournament.uuid) > -1) {
+                   $scope.tournament.push(tournament);
+               }
+            });
+            $scope.tournaments = tournaments;
         });
     });
 
@@ -55,6 +67,15 @@ controllers.controller('VenueController', function VenueController($scope, $rout
     $scope.venue = {};
     Venue.get({uuid: $routeParams.uuid}).$promise.then(function (venue) {
         $scope.venue = venue;
+    });
+
+});
+
+controllers.controller('TournamentController', function TournamentController($scope, $routeParams, Tournament) {
+
+    $scope.tournament = {};
+    Tournament.get({uuid: $routeParams.uuid}).$promise.then(function (venue) {
+        $scope.tournament = venue;
     });
 
 });
