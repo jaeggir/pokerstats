@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-md-12">
-        <h3>{{event.name}}</h3>
+        <h2>Poker-Nights</h2>
+        <br>
         <div data-ng-repeat="season in seasons | orderBy:'-name'">
             <strong>{{season.name}}</strong>
             <ul data-ng-repeat="event in events | orderBy:'-date'">
