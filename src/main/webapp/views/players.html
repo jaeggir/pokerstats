@@ -15,7 +15,9 @@
                 <tr data-ng-repeat="player in players">
                     <td>{{player.uuid}}</td>
                     <td>{{player.nickname}}</td>
-                    <td>{{player.guest}}</td>
+                    <td>
+                        <span data-ng-if="player.guest" class="glyphicon glyphicon-ok"></span>
+                    </td>
                     <td>{{player.birthday | defaultDate}}</td>
                     <td>{{player.joined | defaultDate}}</td>
                     <td>{{player.updated | defaultDateTime}}</td>
