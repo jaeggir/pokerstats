@@ -125,11 +125,10 @@ controllers.controller('EventController', function EventController($scope, $rout
         });
         Tournaments.query().$promise.then(function (tournaments) {
             angular.forEach(tournaments, function (tournament) {
-                if ($scope.tournaments.indexOf(tournament.uuid) > -1) {
-                    $scope.tournament.push(tournament);
+                if (tournament.eventUuid == $scope.event.uuid ) {
+                    $scope.tournaments.push(tournament);
                 }
             });
-            $scope.tournaments = tournaments;
         });
     });
 
