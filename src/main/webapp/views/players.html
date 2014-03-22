@@ -3,15 +3,13 @@
         <h3>Spieler</h3>
         <table class="table table-striped">
             <thead>
-                <th>#</th>
                 <th>Nickname</th>
                 <th>Gast</th>
                 <th>Geburtsdatum</th>
                 <th>Beitritt</th>
                 <th>Letztes Update</th>
             </thead>
-            <tr data-ng-repeat="player in players">
-                <td>{{player.uuid}}</td>
+            <tr data-ng-repeat="player in players | orderBy:'joined'">
                 <td><a data-ng-href="/#player/{{player.uuid}}">{{player.nickname}}</a></td>
                 <td>
                     <span data-ng-if="player.guest" class="glyphicon glyphicon-ok"></span>
