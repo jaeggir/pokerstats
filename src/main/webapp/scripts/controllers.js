@@ -55,6 +55,17 @@ controllers.controller('PlayerController', function PlayersController($scope, $r
         $scope.averageWin = Math.round(winSummary / results.length * 100) / 100;
     });
 
+    $scope.xAxisTickFormatFunction = function () {
+        return function (d) {
+            return d;
+        };
+    };
+    $scope.yAxisTickFormatFunction = function () {
+        return function (d) {
+            return d; //uncomment for date format
+        };
+    };
+
 });
 
 controllers.controller('EventController', function EventController($scope, $routeParams, Event, Venue, Player,
