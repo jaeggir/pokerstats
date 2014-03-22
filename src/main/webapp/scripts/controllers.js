@@ -92,13 +92,18 @@ controllers.controller('VenuesController', function VenuesController($scope, Ven
     $scope.bounds = new google.maps.LatLngBounds();
 
     $scope.mapOptions = {
-        zoom: 13,
+        zoom: 11,
         mapTypeId: google.maps.MapTypeId.ROAD
     };
     $scope.mapCenter = new google.maps.LatLng(47.5, 8.53);
 
-    $scope.selectMarker = function (venue) {
-        console.log('TODO open info window for venue ' + venue.uuid);
+    $scope.centerToMarkerAndOpenInfoWindow = function (venue) {
+        // FIX open info window
+        $scope.mapCenter = new google.maps.LatLng(venue.latitude, venue.longitude);
+        $scope.markerEvents = [{
+            event: 'openinfowindow',
+            ids: [venue.uuid]
+        }];
     };
 
     Venues.query().$promise.then(function (venues) {

@@ -22,7 +22,7 @@
                     <span data-ng-if="venue.current" class="glyphicon glyphicon-ok"></span>
                 </td>
                 <td>{{venue.updated | defaultDateTime}}</td>
-                <td data-ng-click="selectMarker(venue)"><span class="glyphicon glyphicon-record"></span></td>
+                <td data-ng-click="centerToMarkerAndOpenInfoWindow(venue)"><span class="glyphicon glyphicon-screenshot"></span></td>
             </tr>
         </table>
 
@@ -32,8 +32,12 @@
 
             <gm-markers gm-objects="venues"
                         gm-id="object.uuid"
+                        gm-events="markerEvents"
+                        gm-on-openinfowindow="venue = object; infoWindow.open(marker.getMap(), marker);"
                         gm-position="{ lat: object.latitude, lng: object.longitude }"
-                        gm-marker-options="{ title: object.name, clickable: false}">
+                        gm-marker-options="{ title: object.name, clickable: false}"
+                        gm-on-click="centerToMarkerAndOpenInfoWindow(object)"
+                        gm-on-mouseover="centerToMarkerAndOpenInfoWindow(object)">
             </gm-markers>
 
         </gm-map>
