@@ -16,6 +16,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+import static ch.rogerjaeggi.pokerstats.web.config.Constants.API_PREFIX;
+
 @Controller
 public class VenueController {
 
@@ -24,7 +26,7 @@ public class VenueController {
     @Inject
     private VenueRepository venueRepository;
 
-    @RequestMapping(value = "/1.0/venue", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "venue", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<VenueDto> getAllVenues(HttpServletResponse response) {
         log.debug("REST request to get all venues");
@@ -36,7 +38,7 @@ public class VenueController {
         return VenueMapper.toDto(venues);
     }
 
-    @RequestMapping(value = "/1.0/venue/{venueUuid}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "venue/{venueUuid}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     VenueDto getVenue(@PathVariable String venueUuid, HttpServletResponse response) {
         log.debug("REST request to get venue : '{}'", venueUuid);

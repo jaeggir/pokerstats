@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.LinkedList;
 import java.util.List;
 
+import static ch.rogerjaeggi.pokerstats.web.config.Constants.API_PREFIX;
+
 @Controller
 public class SeasonController {
 
@@ -27,7 +29,7 @@ public class SeasonController {
     @Inject
     private EventRepository eventRepository;
 
-    @RequestMapping(value = "/1.0/season", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "season", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody List<SeasonDto> getCurrentSeason(
             HttpServletResponse response,
             @RequestParam(value = "filter", required = false) String filter) {
@@ -54,7 +56,7 @@ public class SeasonController {
         }
     }
 
-    @RequestMapping(value = "/1.0/season/{seasonUuid}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "season/{seasonUuid}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody SeasonDto getSeason(@PathVariable String seasonUuid, HttpServletResponse response) {
         log.debug("REST request to get season : '{}'", seasonUuid);
         Season season = seasonRepository.getByUuid(seasonUuid);

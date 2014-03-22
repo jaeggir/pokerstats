@@ -33,46 +33,48 @@ pokerstatsApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.otherwise({redirectTo: '/events'});
 }]);
 
-pokerstatsApp.factory('Players', function ($resource) {
-    return $resource('rest/1.0/player/');
+pokerstatsApp.constant('API_VERSION', '1.0');
+
+pokerstatsApp.factory('Players', function ($resource, API_VERSION) {
+    return $resource('rest/' + API_VERSION + '/player/');
 });
 
-pokerstatsApp.factory('Player', function ($resource) {
-    return $resource('rest/1.0/player/:uuid');
+pokerstatsApp.factory('Player', function ($resource, API_VERSION) {
+    return $resource('rest/' + API_VERSION + '/player/:uuid');
 });
 
-pokerstatsApp.factory('Seasons', function ($resource) {
-    return $resource('rest/1.0/season');
+pokerstatsApp.factory('Seasons', function ($resource, API_VERSION) {
+    return $resource('rest/' + API_VERSION + '/season');
 });
 
-pokerstatsApp.factory('Events', function ($resource) {
-    return $resource('rest/1.0/event/');
+pokerstatsApp.factory('Events', function ($resource, API_VERSION) {
+    return $resource('rest/' + API_VERSION + '/event/');
 });
 
-pokerstatsApp.factory('Event', function ($resource) {
-    return $resource('rest/1.0/event/:uuid');
+pokerstatsApp.factory('Event', function ($resource, API_VERSION) {
+    return $resource('rest/' + API_VERSION + '/event/:uuid');
 });
 
-pokerstatsApp.factory('Venues', function ($resource) {
-    return $resource('rest/1.0/venue/');
+pokerstatsApp.factory('Venues', function ($resource, API_VERSION) {
+    return $resource('rest/' + API_VERSION + '/venue/');
 });
 
-pokerstatsApp.factory('Venue', function ($resource) {
-    return $resource('rest/1.0/venue/:uuid');
+pokerstatsApp.factory('Venue', function ($resource, API_VERSION) {
+    return $resource('rest/' + API_VERSION + '/venue/:uuid');
 });
 
-pokerstatsApp.factory('Tournaments', function ($resource) {
-    return $resource('rest/1.0/tournament/');
+pokerstatsApp.factory('Tournaments', function ($resource, API_VERSION) {
+    return $resource('rest/' + API_VERSION + '/tournament/');
 });
 
-pokerstatsApp.factory('Tournament', function ($resource) {
-    return $resource('rest/1.0/tournament/:uuid');
+pokerstatsApp.factory('Tournament', function ($resource, API_VERSION) {
+    return $resource('rest/' + API_VERSION + '/tournament/:uuid');
 });
 
-pokerstatsApp.factory('TournamentResults', function ($resource) {
-    return $resource('rest/1.0/tournament/:uuid/results');
+pokerstatsApp.factory('TournamentResults', function ($resource, API_VERSION) {
+    return $resource('rest/' + API_VERSION + '/tournament/:uuid/results');
 });
 
-pokerstatsApp.factory('PlayerResults', function ($resource) {
-    return $resource('rest/1.0/player/:uuid/results');
+pokerstatsApp.factory('PlayerResults', function ($resource, API_VERSION) {
+    return $resource('rest/' + API_VERSION + '/player/:uuid/results');
 });

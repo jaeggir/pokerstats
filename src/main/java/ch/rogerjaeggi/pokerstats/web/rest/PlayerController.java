@@ -17,6 +17,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+import static ch.rogerjaeggi.pokerstats.web.config.Constants.API_PREFIX;
+
 @Controller
 public class PlayerController {
 
@@ -28,7 +30,7 @@ public class PlayerController {
     @Inject
     private TournamentResultRepository tournamentResultRepository;
 
-    @RequestMapping(value = "/1.0/player", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "player", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<PlayerDto> getAllPlayers(HttpServletResponse response) {
         log.debug("REST request to get all players");
@@ -40,7 +42,7 @@ public class PlayerController {
         return PlayerMapper.toDto(players);
     }
 
-    @RequestMapping(value = "/1.0/player/{playerUuid}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "player/{playerUuid}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody PlayerDto getPlayer(@PathVariable String playerUuid, HttpServletResponse response) {
         log.debug("REST request to get player : '{}'", playerUuid);
         Player player = playerRepository.getByUuid(playerUuid);
@@ -52,7 +54,7 @@ public class PlayerController {
         return PlayerMapper.toDto(player);
     }
 
-    @RequestMapping(value = "/1.0/player/{playerUuid}/results", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "player/{playerUuid}/results", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody List<TournamentResultDto> getResults(@PathVariable String playerUuid, HttpServletResponse response) {
         log.debug("REST request to get player : '{}'", playerUuid);
         List<TournamentResult> results = tournamentResultRepository.getAllForPlayer(playerUuid);
@@ -64,7 +66,7 @@ public class PlayerController {
         return TournamentResultMapper.toDto(results);
     }
 
-    @RequestMapping(value = "/1.0/player", method = RequestMethod.POST,
+    @RequestMapping(value = API_PREFIX + "player", method = RequestMethod.POST,
             produces = "application/json",
             consumes = "application/json")
     public @ResponseBody PlayerDto addPlayer(@RequestBody PlayerDto playerDto) {

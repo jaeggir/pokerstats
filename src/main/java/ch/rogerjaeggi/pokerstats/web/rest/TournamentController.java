@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.LinkedList;
 import java.util.List;
 
+import static ch.rogerjaeggi.pokerstats.web.config.Constants.API_PREFIX;
+
 @Controller
 public class TournamentController {
 
@@ -33,7 +35,8 @@ public class TournamentController {
     @Inject
     private TournamentResultRepository tournamentResultRepository;
 
-    @RequestMapping(value = "/1.0/tournament", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "tournament",
+            method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<TournamentDto> getAllTournaments(HttpServletResponse response) {
         log.debug("REST request to get all tournaments");
@@ -45,7 +48,8 @@ public class TournamentController {
         return TournamentMapper.toDto(tournaments);
     }
 
-    @RequestMapping(value = "/1.0/tournament/{tournamentUuid}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "tournament/{tournamentUuid}",
+            method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     TournamentDto getTournament(@PathVariable String tournamentUuid, HttpServletResponse response) {
         log.debug("REST request to get tournament : '{}'", tournamentUuid);
@@ -65,7 +69,8 @@ public class TournamentController {
         return dto;
     }
 
-    @RequestMapping(value = "/1.0/tournament/{tournamentUuid}/results", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "tournament/{tournamentUuid}/results",
+            method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<TournamentResultDto> getResults(@PathVariable String tournamentUuid, HttpServletResponse response) {
         log.debug("REST request to get tournament results: '{}'", tournamentUuid);

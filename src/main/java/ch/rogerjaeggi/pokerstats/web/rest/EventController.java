@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.LinkedList;
 import java.util.List;
 
+import static ch.rogerjaeggi.pokerstats.web.config.Constants.API_PREFIX;
+
 @Controller
 public class EventController {
 
@@ -35,7 +37,7 @@ public class EventController {
     @Inject
     private TournamentRepository tournamentRepository;
 
-    @RequestMapping(value = "/1.0/event", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "event", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<EventDto> getEvents(HttpServletResponse response) {
         log.debug("REST request to get all events");
@@ -51,7 +53,7 @@ public class EventController {
         return dtos;
     }
 
-    @RequestMapping(value = "/1.0/event", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "event", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
     EventDto addEvent(@RequestBody EventDto eventDto) {
         log.debug("REST request to add event, name=" + eventDto.getName());
@@ -63,7 +65,7 @@ public class EventController {
         return eventDto;
     }
 
-    @RequestMapping(value = "/1.0/event/{uuid}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "event/{uuid}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     EventDto getEvent(@PathVariable String uuid, HttpServletResponse response) {
         log.debug("REST request to get event : '{}'", uuid);
