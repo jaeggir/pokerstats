@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3>Lokalitäten</h3>
+        <table class="table table-striped">
+            <thead>
+                <th>Name</th>
+                <th>Adresse</th>
+                <th>Aktuelle Austragung</th>
+                <th>Letztes Update</th>
+            </thead>
+            <tr data-ng-repeat="venue in venues | orderBy:'uuid'">
+                <td>
+                    <span class="glyphicon glyphicon-home"></span>&nbsp;
+                    <a data-ng-href="/#venue/{{venue.uuid}}">{{venue.name}}</a>
+                </td>
+                <td>
+                    {{venue.street}}, {{venue.zip}} {{venue.city}}
+                    <span data-ng-if="venue.country !== 'CH">{{venue.country}}</span>
+                </td>
+                <td>
+                    <span data-ng-if="venue.current" class="glyphicon glyphicon-ok"></span>
+                </td>
+                <td>{{venue.updated | defaultDateTime}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

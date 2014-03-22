@@ -86,6 +86,16 @@ controllers.controller('EventController', function EventController($scope, $rout
 
 });
 
+controllers.controller('VenuesController', function VenuesController($scope, Venues) {
+
+    $scope.venues = [];
+
+    Venues.query().$promise.then(function (venues) {
+        $scope.venues = venues;
+    });
+
+});
+
 controllers.controller('VenueController', function VenueController($scope, $routeParams, Venue) {
 
     $scope.venue = {};
@@ -119,6 +129,24 @@ controllers.controller('EventsController', function EventsController($scope, $ro
     });
     Events.query().$promise.then(function (events) {
         $scope.events = events;
+    });
+
+});
+
+controllers.controller('TournamentController', function TournamentController($scope, $routeParams, Tournament,
+                                                                             TournamentResults) {
+
+    $scope.tournament = {};
+    $scope.results = [];
+    Tournament.get({uuid: $routeParams.uuid}).$promise.then(function (tournament) {
+        $scope.tournament = tournament;
+        TournamentResults.query({uuid: tournament.uuid}).$promise.then(function (results) {
+            angular.forEach(results, function (result) {
+                if (result.tournamentUuid === $scope.tournament.uuid) {
+                    $scope.results.push(result);
+                }
+            });
+        });
     });
 
 });

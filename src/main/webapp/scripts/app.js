@@ -25,6 +25,7 @@ pokerstatsApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/events', {templateUrl: 'views/events.html', controller: 'EventsController'});
     $routeProvider.when('/player/:uuid', {templateUrl: 'views/player.html', controller: 'PlayerController'});
     $routeProvider.when('/event/:uuid', {templateUrl: 'views/event.html', controller: 'EventController'});
+    $routeProvider.when('/venues', {templateUrl: 'views/venues.html', controller: 'VenuesController'});
     $routeProvider.when('/venue/:uuid', {templateUrl: 'views/venue.html', controller: 'VenueController'});
     $routeProvider.when('/tournament/:uuid', {templateUrl: 'views/tournament.html', controller: 'TournamentController'});
     $routeProvider.otherwise({redirectTo: '/'});
