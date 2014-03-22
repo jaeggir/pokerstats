@@ -89,8 +89,23 @@ controllers.controller('EventController', function EventController($scope, $rout
 controllers.controller('VenueController', function VenueController($scope, $routeParams, Venue) {
 
     $scope.venue = {};
+    $scope.venues = []; // for the markers
+
+    $scope.mapOptions = {
+        zoom: 14,
+        mapTypeId: google.maps.MapTypeId.ROAD
+    };
+
+    $scope.mapCenter = new google.maps.LatLng(47.5, 8.53);
+    $scope.zoom = 16;
+
     Venue.get({uuid: $routeParams.uuid}).$promise.then(function (venue) {
         $scope.venue = venue;
+
+        $scope.venues.push(venue);
+        $scope.mapCenter = new google.maps.LatLng(venue.latitude, venue.longitude);
+
+        $scope.$broadcast('gmMarkersUpdate', 'venue');
     });
 
 });

@@ -1,5 +1,23 @@
 <div class="row">
     <div class="col-md-12">
         <h3>{{venue.name}}</h3>
+
+        <address>
+            {{venue.street}}<br>
+            {{venue.zip}} {{venue.city}}
+            <span data-ng-if="venue.country !== 'CH'">{{venue.country}}</span>
+        </address>
+
+        <gm-map gm-map-id="'venueMap'" gm-center="mapCenter" class="venueMap"
+                gm-map-options="mapOptions">
+
+            <gm-markers gm-objects="venues"
+                        gm-id="object.uuid"
+                        gm-position="{ lat: object.latitude, lng: object.longitude }"
+                        gm-marker-options="{ title: object.name, clickable: false}">
+            </gm-markers>
+
+        </gm-map>
+
     </div>
 </div>

@@ -10,6 +10,7 @@ var pokerstatsApp = angular.module('pokerstatsApp', [
     'ngRoute',
     'ngCookies',
     'nvd3ChartDirectives',
+    'AngularGM',
 
     'pokerstatsApp.controllers',
     'pokerstatsApp.directives',
