@@ -22,7 +22,6 @@ var pokerstatsApp = angular.module('pokerstatsApp', [
 ]);
 
 pokerstatsApp.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/', {templateUrl: 'views/main.html', controller: 'MainController'});
     $routeProvider.when('/players', {templateUrl: 'views/players.html', controller: 'PlayersController'});
     $routeProvider.when('/events', {templateUrl: 'views/events.html', controller: 'EventsController'});
     $routeProvider.when('/player/:uuid', {templateUrl: 'views/player.html', controller: 'PlayerController'});
@@ -30,7 +29,7 @@ pokerstatsApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/venues', {templateUrl: 'views/venues.html', controller: 'VenuesController'});
     $routeProvider.when('/venue/:uuid', {templateUrl: 'views/venue.html', controller: 'VenueController'});
     $routeProvider.when('/tournament/:uuid', {templateUrl: 'views/tournament.html', controller: 'TournamentController'});
-    $routeProvider.otherwise({redirectTo: '/'});
+    $routeProvider.otherwise({redirectTo: '/events'});
 }]);
 
 pokerstatsApp.factory('Players', function ($resource) {
