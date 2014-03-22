@@ -41,7 +41,7 @@ public class Venue extends BaseEntity {
     @Column(name = "_LONGITUDE")
     private BigDecimal longitude;
 
-    @Column(name = "_UPDATED", insertable = false, updatable = false)
+    @Column(name = "_UPDATED")
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime updated;
 }

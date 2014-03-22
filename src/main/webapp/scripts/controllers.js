@@ -189,16 +189,66 @@ controllers.controller('VenueController', function VenueController($scope, $rout
 
 });
 
-controllers.controller('EventsController', function EventsController($scope, $routeParams, Seasons, Events) {
+controllers.controller('EventsController', function EventsController($scope, $modal, Seasons, Events, Players, Venues) {
 
     $scope.seasons = {};
     $scope.events = {};
+    $scope.players = {};
+    $scope.venues = {};
+
     Seasons.query().$promise.then(function (seasons) {
         $scope.seasons = seasons;
     });
     Events.query().$promise.then(function (events) {
         $scope.events = events;
     });
+    Players.query().$promise.then(function (players) {
+        $scope.players = players;
+    });
+    Venues.query().$promise.then(function (venues) {
+        $scope.venues = venues;
+    });
+
+    $scope.addEvent = function () {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'myModalContent.html',
+            controller: ModalInstanceCtrl,
+            resolve: {
+                players: function () {
+                    return $scope.players;
+                },
+                venues: function () {
+                    return $scope.venues;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (event) {
+            // FIX is not updated..
+            $scope.events.push(event);
+        }, function () {
+            console.log('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    var ModalInstanceCtrl = function ($scope, $modalInstance, Events, players, venues) {
+        $scope.event = new Events();
+        $scope.players = players;
+        $scope.venues = venues;
+
+        $scope.ok = function () {
+            // FIX hack..
+            $scope.event.date = new Date($scope.event.date).getTime();
+            $scope.event.$save(function (event) {
+                $modalInstance.close(event);
+            });
+        };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    };
 
 });
 

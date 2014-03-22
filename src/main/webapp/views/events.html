@@ -11,4 +11,59 @@
             </ul>
         </div>
     </div>
+
+    <button type="button" class="btn btn-primary" data-ng-click="addEvent()">
+        <span class="glyphicon glyphicon-plus-sign"></span> Event hinzufügen
+    </button>
 </div>
+
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3>Neuen Event erfassen</h3>
+    </div>
+    <div class="modal-body">
+
+        <form class="form-horizontal" name="commentform" method="post">
+
+            <div class="form-group">
+                <label class="control-label col-md-4" for="name">Name</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" data-ng-model="event.name" id="name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-4" for="date">Datum</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="date" data-ng-model="event.date">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-4" for="host">Veranstalter</label>
+                <div class="col-md-6">
+                    <select data-ui-select2="{ allowClear: true}" data-ng-model="event.hostPlayerUuid" id="host"
+                            style="width: 100%">
+                        <option ng-repeat="player in players" value="{{player.uuid}}">{{player.nickname}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-4" for="venue">Ort</label>
+                <div class="col-md-6">
+                    <select data-ui-select2="{ allowClear: true}" data-ng-model="event.venueUuid" id="venue"
+                            style="width: 100%">
+                        <option ng-repeat="venue in venues" value="{{venue.uuid}}">{{venue.name}}, {{venue.zip}} {{venue.city}}</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" data-ng-click="ok()">Hinzufügen</button>
+        <button class="btn btn-warning" data-ng-click="cancel()">Abbrechen</button>
+    </div>
+</script>

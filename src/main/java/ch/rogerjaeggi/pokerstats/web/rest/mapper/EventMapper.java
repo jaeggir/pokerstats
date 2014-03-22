@@ -3,6 +3,8 @@ package ch.rogerjaeggi.pokerstats.web.rest.mapper;
 
 import ch.rogerjaeggi.pokerstats.domain.Event;
 import ch.rogerjaeggi.pokerstats.web.rest.dto.EventDto;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import java.util.List;
 
@@ -19,5 +21,13 @@ public class EventMapper {
         dto.setSeasonUuid(event.getSeasonUuid());
         dto.setTournaments(tournaments);
         return dto;
+    }
+
+    public static Event fromDto(EventDto dto) {
+        Event event = new Event();
+        event.setName(dto.getName());
+        event.setDate(new LocalDate(dto.getDate()));
+        event.setUpdated(LocalDateTime.now());
+        return event;
     }
 }

@@ -2,17 +2,13 @@ package ch.rogerjaeggi.pokerstats.web.rest;
 
 import ch.rogerjaeggi.pokerstats.domain.Event;
 import ch.rogerjaeggi.pokerstats.domain.Tournament;
-import ch.rogerjaeggi.pokerstats.repository.EventRepository;
-import ch.rogerjaeggi.pokerstats.repository.TournamentRepository;
+import ch.rogerjaeggi.pokerstats.repository.*;
 import ch.rogerjaeggi.pokerstats.web.rest.dto.EventDto;
 import ch.rogerjaeggi.pokerstats.web.rest.mapper.EventMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +22,15 @@ public class EventController {
 
     @Inject
     private EventRepository eventRepository;
+
+    @Inject
+    private SeasonRepository seasonRepository;
+
+    @Inject
+    private VenueRepository venueRepository;
+
+    @Inject
+    private PlayerRepository playerRepository;
 
     @Inject
     private TournamentRepository tournamentRepository;
@@ -44,6 +49,18 @@ public class EventController {
             dtos.add(EventMapper.toDto(event, null));
         }
         return dtos;
+    }
+
+    @RequestMapping(value = "/1.0/event", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody
+    EventDto addEvent(@RequestBody EventDto eventDto) {
+        log.debug("REST request to add event, name=" + eventDto.getName());
+        Event event = EventMapper.fromDto(eventDto);
+        event.setSeason(seasonRepository.getByUuid("3"));
+        event.setVenue(venueRepository.getByUuid(eventDto.getVenueUuid()));
+        event.setHost(playerRepository.getByUuid(eventDto.getHostPlayerUuid()));
+        eventRepository.update(event);
+        return eventDto;
     }
 
     @RequestMapping(value = "/1.0/event/{uuid}", method = RequestMethod.GET, produces = "application/json")

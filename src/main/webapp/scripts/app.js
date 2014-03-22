@@ -13,6 +13,7 @@ var pokerstatsApp = angular.module('pokerstatsApp', [
     'nvd3ChartDirectives',
     'AngularGM',
     'ui.bootstrap',
+    'ui.select2',
 
     'pokerstatsApp.controllers',
     'pokerstatsApp.directives',
