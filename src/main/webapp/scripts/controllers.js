@@ -22,6 +22,14 @@ controllers.controller('PlayersController', function PlayersController($scope, $
         $scope.players = players;
     });
 
+    $scope.editPlayer = function (uuid) {
+        console.log('TODO implement edit player, uuid=' + uuid);
+    };
+
+    $scope.deletePlayer = function (uuid) {
+        console.log('TODO implement delete player, uuid=' + uuid);
+    };
+
     $scope.addPlayer = function () {
 
         var modalInstance = $modal.open({
