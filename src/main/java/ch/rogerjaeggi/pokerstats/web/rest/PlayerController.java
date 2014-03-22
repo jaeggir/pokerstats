@@ -11,10 +11,7 @@ import ch.rogerjaeggi.pokerstats.web.rest.mapper.TournamentResultMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -65,5 +62,14 @@ public class PlayerController {
         }
 
         return TournamentResultMapper.toDto(results);
+    }
+
+    @RequestMapping(value = "/1.0/player", method = RequestMethod.POST,
+            produces = "application/json",
+            consumes = "application/json")
+    public @ResponseBody PlayerDto addPlayer(@RequestBody PlayerDto playerDto) {
+        log.debug("REST request to add player : '{}'", playerDto.getNickname());
+        playerRepository.update(PlayerMapper.fromDto(playerDto));
+        return playerDto;
     }
 }

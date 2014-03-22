@@ -15,12 +15,42 @@ controllers.controller('MainController', function MainController($scope, Seasons
     });
 });
 
-controllers.controller('PlayersController', function PlayersController($scope, Players) {
+controllers.controller('PlayersController', function PlayersController($scope, $modal, Players) {
 
     $scope.players = {};
     Players.query().$promise.then(function (players) {
         $scope.players = players;
     });
+
+    $scope.addPlayer = function () {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'myModalContent.html',
+            controller: ModalInstanceCtrl
+        });
+
+        modalInstance.result.then(function (player) {
+            $scope.players.push(player);
+        }, function () {
+            console.log('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    var ModalInstanceCtrl = function ($scope, $modalInstance, Players) {
+        $scope.player = new Players();
+
+        $scope.ok = function () {
+            // FIX hack..
+            $scope.player.birthday = new Date($scope.player.birthday).getTime();
+            $scope.player.$save(function (player) {
+                $modalInstance.close(player);
+            });
+        };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    };
 
 });
 

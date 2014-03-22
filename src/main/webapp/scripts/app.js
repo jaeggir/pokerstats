@@ -9,8 +9,10 @@ var pokerstatsApp = angular.module('pokerstatsApp', [
     'ngResource',
     'ngRoute',
     'ngCookies',
+
     'nvd3ChartDirectives',
     'AngularGM',
+    'ui.bootstrap',
 
     'pokerstatsApp.controllers',
     'pokerstatsApp.directives',
