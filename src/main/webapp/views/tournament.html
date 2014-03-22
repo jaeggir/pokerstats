@@ -1,9 +1,11 @@
 <div class="row">
     <div class="col-md-12">
-        <h3>{{tournament.uuid}}</h3>
+        <h3>Runde {{tournament.round}}</h3>
+        <small>Letztes Update: {{tournament.updated | defaultDateTime}}</small>
 
+        <h4>Rangliste</h4>
         <div data-ng-repeat="result in results | orderBy:'rank'">
-            {{result.rank}}. {{result.points}}
+            {{result.rank}}. Rang: <a data-ng-href="#/player/{{player.uuid}}">{{player.nickname}}</a> ({{result.points}} Punkte)<br>
         </div>
     </div>
 </div>
