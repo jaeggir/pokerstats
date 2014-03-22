@@ -15,7 +15,7 @@
                 </td>
                 <td>
                     {{venue.street}}, {{venue.zip}} {{venue.city}}
-                    <span data-ng-if="venue.country !== 'CH">{{venue.country}}</span>
+                    <span data-ng-if="venue.country !== 'CH'">{{venue.country}}</span>
                 </td>
                 <td>
                     <span data-ng-if="venue.current" class="glyphicon glyphicon-ok"></span>
@@ -23,5 +23,17 @@
                 <td>{{venue.updated | defaultDateTime}}</td>
             </tr>
         </table>
+
+
+        <gm-map gm-map-id="'venueMap'" gm-center="mapCenter" class="venueMap"
+                gm-map-options="mapOptions">
+
+            <gm-markers gm-objects="venues"
+                        gm-id="object.uuid"
+                        gm-position="{ lat: object.latitude, lng: object.longitude }"
+                        gm-marker-options="{ title: object.name, clickable: false}">
+            </gm-markers>
+
+        </gm-map>
     </div>
 </div>
