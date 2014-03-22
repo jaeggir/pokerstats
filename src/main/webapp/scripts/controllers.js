@@ -91,6 +91,16 @@ controllers.controller('VenuesController', function VenuesController($scope, Ven
     $scope.venues = [];
     $scope.bounds = new google.maps.LatLngBounds();
 
+    $scope.mapOptions = {
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.ROAD
+    };
+    $scope.mapCenter = new google.maps.LatLng(47.5, 8.53);
+
+    $scope.selectMarker = function (venue) {
+        console.log('TODO open info window for venue ' + venue.uuid);
+    };
+
     Venues.query().$promise.then(function (venues) {
         $scope.venues = venues;
         angular.forEach(venues, function (venue) {
@@ -100,12 +110,6 @@ controllers.controller('VenuesController', function VenuesController($scope, Ven
         $scope.mapCenter = new google.maps.LatLng(center.k, center.A);
         $scope.$broadcast('gmMarkersUpdate', 'venues');
     });
-
-    $scope.mapOptions = {
-        zoom: 13,
-        mapTypeId: google.maps.MapTypeId.ROAD
-    };
-    $scope.mapCenter = new google.maps.LatLng(47.5, 8.53);
 
 });
 
