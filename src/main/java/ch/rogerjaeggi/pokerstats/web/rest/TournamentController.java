@@ -75,9 +75,12 @@ public class TournamentController {
     List<TournamentResultDto> getResults(@PathVariable String tournamentUuid, HttpServletResponse response) {
         log.debug("REST request to get tournament results: '{}'", tournamentUuid);
         List<TournamentResult> results = tournamentResultRepository.getAllForTournament(tournamentUuid);
-        if (results == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return null;
+        if (results.isEmpty()) {
+            // check if tournament exists
+            if (tournamentRepository.getByUuid(tournamentUuid) == null) {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                return null;
+            }
         }
         return TournamentResultMapper.toDto(results);
     }

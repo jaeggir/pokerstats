@@ -30,19 +30,18 @@ public class PlayerController {
     @Inject
     private TournamentResultRepository tournamentResultRepository;
 
-    @RequestMapping(value = API_PREFIX + "player", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    List<PlayerDto> getAllPlayers(HttpServletResponse response) {
+    @RequestMapping(
+            value = API_PREFIX + "player",
+            method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody List<PlayerDto> getAllPlayers() {
         log.debug("REST request to get all players");
         List<Player> players = playerRepository.getAll();
-        if (players == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return null;
-        }
         return PlayerMapper.toDto(players);
     }
 
-    @RequestMapping(value = API_PREFIX + "player/{playerUuid}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(
+            value = API_PREFIX + "player/{playerUuid}",
+            method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody PlayerDto getPlayer(@PathVariable String playerUuid, HttpServletResponse response) {
         log.debug("REST request to get player : '{}'", playerUuid);
         Player player = playerRepository.getByUuid(playerUuid);
@@ -54,19 +53,26 @@ public class PlayerController {
         return PlayerMapper.toDto(player);
     }
 
-    @RequestMapping(value = API_PREFIX + "player/{playerUuid}/results", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody List<TournamentResultDto> getResults(@PathVariable String playerUuid, HttpServletResponse response) {
+    @RequestMapping(
+            value = API_PREFIX + "player/{playerUuid}/results",
+            method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    List<TournamentResultDto> getResults(@PathVariable String playerUuid, HttpServletResponse response) {
         log.debug("REST request to get player : '{}'", playerUuid);
         List<TournamentResult> results = tournamentResultRepository.getAllForPlayer(playerUuid);
-        if (results == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return null;
+        if (results.isEmpty()) {
+            // check if the player exists
+            if (playerRepository.getByUuid(playerUuid) == null) {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                return null;
+            }
         }
 
         return TournamentResultMapper.toDto(results);
     }
 
-    @RequestMapping(value = API_PREFIX + "player", method = RequestMethod.POST,
+    @RequestMapping(
+            value = API_PREFIX + "player", method = RequestMethod.POST,
             produces = "application/json",
             consumes = "application/json")
     public @ResponseBody PlayerDto addPlayer(@RequestBody PlayerDto playerDto) {

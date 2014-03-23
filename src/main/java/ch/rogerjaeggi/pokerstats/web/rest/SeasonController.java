@@ -30,17 +30,11 @@ public class SeasonController {
     private EventRepository eventRepository;
 
     @RequestMapping(value = API_PREFIX + "season", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody List<SeasonDto> getCurrentSeason(
-            HttpServletResponse response,
-            @RequestParam(value = "filter", required = false) String filter) {
+    public @ResponseBody List<SeasonDto> getSeasons(@RequestParam(value = "filter", required = false) String filter) {
 
         if ("current".equals(filter)) {
             log.debug("REST request to get the current season");
             Season season = seasonRepository.getCurrentSeason();
-            if (season == null) {
-                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                return null;
-            }
             LinkedList<SeasonDto> seasons = new LinkedList<>();
             SeasonDto dto = SeasonMapper.toDto(season, getEventUuids(season.getUuid()));
             seasons.add(dto);
@@ -48,10 +42,6 @@ public class SeasonController {
         } else {
             log.debug("REST request to get all seasons");
             List<Season> seasons = seasonRepository.getAll();
-            if (seasons == null) {
-                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                return null;
-            }
             return SeasonMapper.toDto(seasons);
         }
     }

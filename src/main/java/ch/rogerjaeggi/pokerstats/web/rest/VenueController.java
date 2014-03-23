@@ -27,14 +27,9 @@ public class VenueController {
     private VenueRepository venueRepository;
 
     @RequestMapping(value = API_PREFIX + "venue", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
-    List<VenueDto> getAllVenues(HttpServletResponse response) {
+    public @ResponseBody List<VenueDto> getAllVenues() {
         log.debug("REST request to get all venues");
         List<Venue> venues = venueRepository.getAll();
-        if (venues == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return null;
-        }
         return VenueMapper.toDto(venues);
     }
 
