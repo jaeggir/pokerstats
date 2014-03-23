@@ -40,11 +40,12 @@
                 <label class="control-label col-md-4" for="date">Datum</label>
                 <div class="col-md-6">
                     <p class="input-group">
-                        <input type="text" id="date" class="form-control" datepicker-popup
-                               ng-model="date" is-open="$parent.opened" min="minDate" date-type="string"
-                               datepicker-options="dateOptions" show-button-bar="false" placeholder="zB. 2014-03-12" />
+                        <input type="text" id="date" class="form-control" data-datepicker-popup
+                               data-ng-model="date" data-is-open="$parent.opened" min="minDate"
+                               data-datepicker-options="dateOptions" data-show-button-bar="false"
+                               data-placeholder="zB. 2014-03-12" />
                         <span class="input-group-btn">
-                            <button class="btn btn-default" ng-click="open($event)">
+                            <button class="btn btn-default" data-ng-click="open($event)">
                                 <i class="glyphicon glyphicon-calendar"></i>
                             </button>
                         </span>
@@ -55,8 +56,8 @@
             <div class="form-group">
                 <label class="control-label col-md-4" for="host">Veranstalter</label>
                 <div class="col-md-6">
-                    <select ui-select2 ng-model="event.hostPlayerUuid" id="host" style="width: 100%">
-                        <option ng-repeat="player in players" value="{{player.uuid}}">{{player.nickname}}</option>
+                    <select data-ui-select2 data-ng-model="event.hostPlayerUuid" id="host" style="width: 100%">
+                        <option data-ng-repeat="player in players" value="{{player.uuid}}">{{player.nickname}}</option>
                     </select>
                 </div>
             </div>
@@ -64,8 +65,8 @@
             <div class="form-group">
                 <label class="control-label col-md-4" for="venue">Ort</label>
                 <div class="col-md-6">
-                    <select ui-select2 ng-model="event.venueUuid" id="venue" style="width: 100%">
-                        <option ng-repeat="venue in venues" value="{{venue.uuid}}">
+                    <select data-ui-select2 data-ng-model="event.venueUuid" id="venue" style="width: 100%">
+                        <option data-ng-repeat="venue in venues" value="{{venue.uuid}}">
                             {{venue.name}}, {{venue.zip}} {{venue.city}}
                         </option>
                     </select>

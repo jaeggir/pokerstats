@@ -46,8 +46,9 @@
             <div class="form-group">
                 <label class="control-label col-md-4" for="players">Spieler</label>
                 <div class="col-md-6">
-                    <select ui-select2 ng-model="tournament.results" id="players" style="width: 100%" multiple>
-                        <option ng-repeat="player in players" value="{{player.uuid}}">{{player.nickname}}</option>
+                    <select data-ui-select2 id="players" style="width: 100%"
+                            data-ng-model="tournament.results" multiple>
+                        <option data-ng-repeat="player in players" value="{{player.uuid}}">{{player.nickname}}</option>
                     </select>
                 </div>
             </div>
