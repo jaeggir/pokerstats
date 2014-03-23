@@ -12,10 +12,7 @@ import ch.rogerjaeggi.pokerstats.web.rest.mapper.TournamentResultMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -35,16 +32,19 @@ public class TournamentController {
     @Inject
     private TournamentResultRepository tournamentResultRepository;
 
-    @RequestMapping(value = API_PREFIX + "tournament",
-            method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = API_PREFIX + "tournament", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    List<TournamentDto> getAllTournaments(HttpServletResponse response) {
-        log.debug("REST request to get all tournaments");
-        List<Tournament> tournaments = tournamentRepository.getAll();
-        if (tournaments == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return null;
+    List<TournamentDto> getAllTournaments(@RequestParam(value = "eventUuid", required = false) String eventUuid) {
+
+        List<Tournament> tournaments;
+        if (eventUuid != null) {
+            log.debug("REST request to get all tournaments with eventUuid='{}'", eventUuid);
+            tournaments = tournamentRepository.getByEventUuid(eventUuid);
+        } else {
+            log.debug("REST request to get all tournaments");
+            tournaments = tournamentRepository.getAll();
         }
+
         return TournamentMapper.toDto(tournaments);
     }
 
