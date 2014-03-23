@@ -157,8 +157,7 @@ controllers.controller('VenuesController', function VenuesController($scope, Ven
                 bounds.extend(new google.maps.LatLng(venue.latitude, venue.longitude));
             });
 
-            var center = bounds.getCenter();
-            gMap.setCenter(new google.maps.LatLng(center.k, center.A));
+            gMap.fitBounds(bounds);
 
             $scope.$broadcast('gmMarkersUpdate', 'venues');
         });
