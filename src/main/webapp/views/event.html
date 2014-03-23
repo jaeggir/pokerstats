@@ -10,5 +10,9 @@
                 <li><a data-ng-href="#/tournament/{{tournament.uuid}}">Runde {{tournament.round}}</a></li>
             </ul>
         </div>
+
+        <div data-ng-if="isAvailable()">
+            <button type="button" class="btn btn-primary" data-ng-click="addTournament()">Spiel hinzufügen</button>
+        </div>
     </div>
 </div>
