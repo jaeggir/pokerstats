@@ -2,9 +2,29 @@
     <div class="col-md-12">
         <h3>Runde {{tournament.round}}</h3>
         <small>Letztes Update: {{tournament.updated | defaultDateTime}}</small>
+        <p>Pot: {{anteTotal}} CHF</p>
 
         <div data-ng-if="tournament.status === 0">
-            Game is running..
+            <h4>Noch dabei:</h4>
+            <ul data-ng-repeat="result in results | onlyActivePlayers" class="list-group">
+                <li class="list-group-item">
+                    {{result.uuid}}
+                    <div class="pull-right action-buttons">
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-default btn-xs" data-ng-click="killPlayer(result.uuid)">
+                                <span class="glyphicon glyphicon-remove" style="margin-right: 0px;"></span>
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <h4>Eliminiert:</h4>
+            <ul data-ng-repeat="result in results | onlyEliminatedPlayers" class="list-group">
+                <li class="list-group-item">
+                    {{result.uuid}}
+                </li>
+            </ul>
         </div>
         <div data-ng-if="tournament.status === 1">
             <h4>Rangliste</h4>
