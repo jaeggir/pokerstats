@@ -202,13 +202,7 @@ controllers.controller('VenueController', function VenueController($scope, $rout
 
     });
 
-    Events.query().$promise.then(function (events) {
-        angular.forEach(events, function (event) {
-            if (event.venueUuid === $routeParams.uuid) {
-                $scope.events.push(event);
-            }
-        });
-    });
+    $scope.events = Events.query({venueUuid: $routeParams.uuid});
 
 });
 

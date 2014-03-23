@@ -20,4 +20,9 @@ public class EventRepository extends JpaRepository<Event> {
         return Collections.checkedList(query.getResultList(), Event.class);
     }
 
+    public List<Event> getByVenueUuid(String venueUuid) {
+        Query query = getEntityManager().createQuery("from Event where venue.uuid=:venueUuid");
+        query.setParameter("venueUuid", venueUuid);
+        return Collections.checkedList(query.getResultList(), Event.class);
+    }
 }

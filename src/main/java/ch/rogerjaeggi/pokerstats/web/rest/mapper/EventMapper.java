@@ -5,9 +5,18 @@ import ch.rogerjaeggi.pokerstats.domain.Event;
 import ch.rogerjaeggi.pokerstats.web.rest.dto.EventDto;
 import org.joda.time.LocalDate;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class EventMapper {
+
+    public static List<EventDto> toDto(List<Event> events) {
+        List<EventDto> dtos = new LinkedList<>();
+        for (Event event : events) {
+            dtos.add(toDto(event, null));
+        }
+        return dtos;
+    }
 
     public static EventDto toDto(Event event, List<String> tournaments) {
         EventDto dto = new EventDto();

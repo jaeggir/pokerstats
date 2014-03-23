@@ -39,18 +39,19 @@ public class EventController {
 
     @RequestMapping(value = API_PREFIX + "event", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    List<EventDto> getEvents(HttpServletResponse response) {
-        log.debug("REST request to get all events");
-        List<Event> events = eventRepository.getAll();
-        if (events == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return null;
+    List<EventDto> getEvents(@RequestParam(value = "venueUuid", required = false) String venueUuid) {
+
+        List<Event> events;
+        if (venueUuid != null) {
+            log.debug("REST request to get all  with venueUuid='{}'", venueUuid);
+            events = eventRepository.getByVenueUuid(venueUuid);
+        } else {
+            log.debug("REST request to get all events");
+            events = eventRepository.getAll();
         }
-        List<EventDto> dtos = new LinkedList<>();
-        for (Event event : events) {
-            dtos.add(EventMapper.toDto(event, null));
-        }
-        return dtos;
+
+        return EventMapper.toDto(events);
+
     }
 
     @RequestMapping(value = API_PREFIX + "event", method = RequestMethod.POST, produces = "application/json")
