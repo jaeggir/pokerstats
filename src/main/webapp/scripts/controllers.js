@@ -4,10 +4,7 @@ var controllers = angular.module('pokerstatsApp.controllers');
 
 controllers.controller('PlayersController', function PlayersController($scope, $modal, $filter, Players) {
 
-    $scope.players = {};
-    Players.query().$promise.then(function (players) {
-        $scope.players = players;
-    });
+    $scope.players = Players.query();
 
     $scope.editPlayer = function (uuid) {
         console.log('TODO implement edit player, uuid=' + uuid);
@@ -70,11 +67,7 @@ controllers.controller('PlayersController', function PlayersController($scope, $
 
 controllers.controller('PlayerController', function PlayersController($scope, $routeParams, Player, PlayerResults) {
 
-    $scope.player = {};
-    Player.get({uuid: $routeParams.uuid }).$promise.then(function (player) {
-        $scope.player = player;
-
-    });
+    $scope.player = Player.get({uuid: $routeParams.uuid });
 
     $scope.results = [];
     $scope.averageRank = null;
@@ -120,18 +113,11 @@ controllers.controller('EventController', function EventController($scope, $rout
     $scope.host = {};
     $scope.tournaments = [];
     Event.get({uuid: $routeParams.uuid}).$promise.then(function (event) {
-
         $scope.event = event;
 
-        Venue.get({uuid: event.venueUuid}).$promise.then(function (venue) {
-            $scope.venue = venue;
-        });
-        Player.get({uuid: event.hostPlayerUuid}).$promise.then(function (player) {
-            $scope.host = player;
-        });
-        Tournaments.query({eventUuid: $scope.event.uuid}).$promise.then(function (tournaments) {
-            $scope.tournaments = tournaments;
-        });
+        $scope.venue = Venue.get({uuid: event.venueUuid});
+        $scope.host = Player.get({uuid: event.hostPlayerUuid});
+        $scope.tournaments = Tournaments.query({eventUuid: $scope.event.uuid});
     });
 
 });
@@ -208,23 +194,10 @@ controllers.controller('VenueController', function VenueController($scope, $rout
 
 controllers.controller('EventsController', function EventsController($scope, $modal, Seasons, Events, Players, Venues) {
 
-    $scope.seasons = {};
-    $scope.events = {};
-    $scope.players = {};
-    $scope.venues = {};
-
-    Seasons.query().$promise.then(function (seasons) {
-        $scope.seasons = seasons;
-    });
-    Events.query().$promise.then(function (events) {
-        $scope.events = events;
-    });
-    Players.query().$promise.then(function (players) {
-        $scope.players = players;
-    });
-    Venues.query().$promise.then(function (venues) {
-        $scope.venues = venues;
-    });
+    $scope.seasons = Seasons.query();
+    $scope.events = Events.query();
+    $scope.players = Players.query();
+    $scope.venues = Venues.query();
 
     $scope.addEvent = function () {
 
@@ -250,6 +223,7 @@ controllers.controller('EventsController', function EventsController($scope, $mo
     };
 
     var ModalInstanceCtrl = function ($scope, $modalInstance, Events, players, venues) {
+
         $scope.event = new Events();
         $scope.players = players;
         $scope.venues = venues;
