@@ -6,9 +6,8 @@ import lombok.Getter;
 @Getter
 public enum TournamentStatus {
 
-    SCHEDULED(0),
-    RUNNING(1),
-    FINISHED(2);
+    RUNNING(0),
+    FINISHED(1);
 
     private int id;
 

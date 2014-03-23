@@ -31,7 +31,7 @@ public class PlayerMapper {
     public static Player fromDto(PlayerDto dto) {
         Player player = new Player();
         player.setNickname(dto.getNickname());
-        player.setGuest(dto.isGuest());
+        player.setGuest(dto.getGuest());
         player.setBirthday(new LocalDate(dto.getBirthday()));
         player.setJoined(LocalDate.now());
         return player;

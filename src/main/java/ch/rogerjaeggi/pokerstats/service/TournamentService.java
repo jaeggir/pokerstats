@@ -28,7 +28,7 @@ public class TournamentService {
 
     public Tournament createTournament(TournamentDto dto) {
         Tournament tournament = new Tournament();
-        tournament.setStatus(TournamentStatus.SCHEDULED.getId());
+        tournament.setStatus(TournamentStatus.RUNNING.getId());
         tournament.setRound(getCurrentRound(dto.getEventUuid()));
         Event event = eventRepository.getByUuid(dto.getEventUuid());
         if (event == null) {
@@ -36,7 +36,6 @@ public class TournamentService {
         }
         tournament.setEvent(event);
         tournament = tournamentRepository.update(tournament);
-
 
         for (String playerUuid : dto.getResults()) {
             TournamentResult result = new TournamentResult();

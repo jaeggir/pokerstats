@@ -16,7 +16,7 @@ public class SeasonDto {
 
     private String name;
 
-    private boolean current;
+    private Boolean current;
 
     private List<String> events;
 

@@ -16,9 +16,9 @@ public class TournamentDto {
 
     private String eventUuid;
 
-    private int round;
+    private Integer round;
 
-    private int ante;
+    private Integer ante;
 
     private int status;
 

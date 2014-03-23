@@ -14,7 +14,7 @@ public class VenueDto {
 
     private String uuid;
 
-    private boolean current;
+    private Boolean current;
 
     private String name;
 

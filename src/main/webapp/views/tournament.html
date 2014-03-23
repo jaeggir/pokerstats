@@ -3,9 +3,14 @@
         <h3>Runde {{tournament.round}}</h3>
         <small>Letztes Update: {{tournament.updated | defaultDateTime}}</small>
 
-        <h4>Rangliste</h4>
-        <div data-ng-repeat="result in results | orderBy:'rank'">
-            {{result.rank}}. Rang: <a data-ng-href="#/player/{{player.uuid}}">{{player.nickname}}</a> ({{result.points}} Punkte)<br>
+        <div data-ng-if="tournament.status === 0">
+            Game is running..
+        </div>
+        <div data-ng-if="tournament.status === 1">
+            <h4>Rangliste</h4>
+            <div data-ng-repeat="result in results | orderBy:'rank'">
+                {{result.rank}}. Rang: <a data-ng-href="#/player/{{player.uuid}}">{{player.nickname}}</a> ({{result.points}} Punkte)<br>
+            </div>
         </div>
     </div>
 </div>

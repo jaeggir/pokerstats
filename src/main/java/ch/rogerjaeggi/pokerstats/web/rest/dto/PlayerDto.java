@@ -14,7 +14,7 @@ public class PlayerDto {
 
     private String nickname;
 
-    private boolean guest;
+    private Boolean guest;
 
     private long birthday;
 

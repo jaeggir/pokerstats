@@ -16,15 +16,15 @@ public class TournamentResultDto {
 
     private String playerUuid;
 
-    private int rank;
+    private Integer rank;
 
-    private int points;
+    private Integer points;
 
     private String eliminatedByPlayerUuid;
 
     private long updated;
 
-    private int ante;
+    private Integer ante;
 
-    private int win;
+    private Integer win;
 }
