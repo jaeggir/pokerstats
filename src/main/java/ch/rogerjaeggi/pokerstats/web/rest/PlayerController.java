@@ -71,7 +71,7 @@ public class PlayerController {
             consumes = "application/json")
     public @ResponseBody PlayerDto addPlayer(@RequestBody PlayerDto playerDto) {
         log.debug("REST request to add player : '{}'", playerDto.getNickname());
-        playerRepository.update(PlayerMapper.fromDto(playerDto));
-        return playerDto;
+        Player player = playerRepository.update(PlayerMapper.fromDto(playerDto));
+        return PlayerMapper.toDto(player);
     }
 }

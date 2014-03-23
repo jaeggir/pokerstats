@@ -2,6 +2,8 @@ package ch.rogerjaeggi.pokerstats.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -48,5 +50,6 @@ public class Tournament extends BaseEntity {
 
     @Column(name = "_UPDATED", insertable = false, updatable = false)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    @Generated(GenerationTime.ALWAYS)
     private LocalDateTime updated;
 }

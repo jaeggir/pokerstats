@@ -32,9 +32,8 @@ public class JpaRepository<T> {
     }
 
     @Transactional
-    public void update(T entity) {
-        entityManager.merge(entity);
-        entityManager.flush();
+    public T update(T entity) {
+        return entityManager.merge(entity);
     }
 
     protected EntityManager getEntityManager() {
