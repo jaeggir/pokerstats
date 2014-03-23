@@ -26,5 +26,4 @@ public class TournamentMapper {
         dto.setUpdated(tournament.getUpdated().toDateTime().getMillis());
         return dto;
     }
-
 }

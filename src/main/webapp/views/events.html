@@ -55,8 +55,7 @@
             <div class="form-group">
                 <label class="control-label col-md-4" for="host">Veranstalter</label>
                 <div class="col-md-6">
-                    <select data-ui-select2="{ allowClear: true}" data-ng-model="event.hostPlayerUuid" id="host"
-                            style="width: 100%">
+                    <select ui-select2 ng-model="event.hostPlayerUuid" id="host" style="width: 100%">
                         <option ng-repeat="player in players" value="{{player.uuid}}">{{player.nickname}}</option>
                     </select>
                 </div>
@@ -65,9 +64,10 @@
             <div class="form-group">
                 <label class="control-label col-md-4" for="venue">Ort</label>
                 <div class="col-md-6">
-                    <select data-ui-select2="{ allowClear: true}" data-ng-model="event.venueUuid" id="venue"
-                            style="width: 100%">
-                        <option ng-repeat="venue in venues" value="{{venue.uuid}}">{{venue.name}}, {{venue.zip}} {{venue.city}}</option>
+                    <select ui-select2 ng-model="event.venueUuid" id="venue" style="width: 100%">
+                        <option ng-repeat="venue in venues" value="{{venue.uuid}}">
+                            {{venue.name}}, {{venue.zip}} {{venue.city}}
+                        </option>
                     </select>
                 </div>
             </div>

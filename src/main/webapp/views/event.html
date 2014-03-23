@@ -1,18 +1,61 @@
 <div class="row">
     <div class="col-md-12">
         <h3>{{event.name}}</h3>
-        <span>Datum: {{event.date | defaultDateTime}}</span><br>
+        <span>Datum: {{event.date | defaultDateWithWeekday}}</span><br>
         <span>Veranstalter: <a data-ng-href="#/player/{{host.uuid}}">{{host.nickname}}</a></span>
         (<a data-ng-href="#/venue/{{venue.uuid}}">{{venue.name}}</a>)<br><br>
         <div data-ng-if="tournaments.length > 0">
             <p>Spiele</p>
             <ul data-ng-repeat="tournament in tournaments">
-                <li><a data-ng-href="#/tournament/{{tournament.uuid}}">Runde {{tournament.round}}</a></li>
+                <li>
+                    <a data-ng-href="#/event/{{event.uuid}}/tournament/{{tournament.uuid}}">
+                        Runde {{tournament.round}}
+                    </a>
+                </li>
             </ul>
         </div>
 
         <div data-ng-if="isAvailable()">
-            <button type="button" class="btn btn-primary" data-ng-click="addTournament()">Spiel hinzufügen</button>
+            <button type="button" class="btn btn-primary" data-ng-click="createTournament()">Spiel erstellen</button>
         </div>
     </div>
 </div>
+
+<script type="text/ng-template" id="createTournamentModal.html">
+    <div class="modal-header">
+        <h3>Spiel erstellen</h3>
+    </div>
+    <div class="modal-body">
+
+        <form class="form-horizontal" name="commentform" method="post">
+
+            <div class="form-group">
+                <label class="control-label col-md-4" for="ante">Einsatz</label>
+                <div class="col-md-6">
+                    <p class="input-group">
+                        <input type="number" min="0" class="form-control" data-ng-model="tournament.ante" id="ante">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default">
+                                <i class="glyphicon glyphicon-usd"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-4" for="players">Spieler</label>
+                <div class="col-md-6">
+                    <select ui-select2 ng-model="tournament.results" id="players" style="width: 100%" multiple>
+                        <option ng-repeat="player in players" value="{{player.uuid}}">{{player.nickname}}</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" data-ng-click="startGame()">Spiel starten</button>
+        <button class="btn btn-warning" data-ng-click="cancel()">Abbrechen</button>
+    </div>
+</script>

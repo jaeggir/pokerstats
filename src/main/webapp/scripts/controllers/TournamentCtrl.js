@@ -7,7 +7,7 @@ controllers.controller('TournamentController', function TournamentController($sc
 
     $scope.tournament = {};
     $scope.results = [];
-    Tournament.get({uuid: $routeParams.uuid}).$promise.then(function (tournament) {
+    Tournament.get({uuid: $routeParams.tournamentUuid}).$promise.then(function (tournament) {
         $scope.tournament = tournament;
         $scope.results = TournamentResults.query({uuid: tournament.uuid});
     });

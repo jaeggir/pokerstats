@@ -5,6 +5,7 @@ import ch.rogerjaeggi.pokerstats.domain.Tournament;
 import ch.rogerjaeggi.pokerstats.domain.TournamentResult;
 import ch.rogerjaeggi.pokerstats.repository.TournamentRepository;
 import ch.rogerjaeggi.pokerstats.repository.TournamentResultRepository;
+import ch.rogerjaeggi.pokerstats.service.TournamentService;
 import ch.rogerjaeggi.pokerstats.web.rest.dto.TournamentDto;
 import ch.rogerjaeggi.pokerstats.web.rest.dto.TournamentResultDto;
 import ch.rogerjaeggi.pokerstats.web.rest.mapper.TournamentMapper;
@@ -30,9 +31,14 @@ public class TournamentController {
     private TournamentRepository tournamentRepository;
 
     @Inject
+    private TournamentService tournamentService;
+
+    @Inject
     private TournamentResultRepository tournamentResultRepository;
 
-    @RequestMapping(value = API_PREFIX + "tournament", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(
+            value = API_PREFIX + "tournament",
+            method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<TournamentDto> getAllTournaments(@RequestParam(value = "eventUuid", required = false) String eventUuid) {
 
@@ -48,7 +54,8 @@ public class TournamentController {
         return TournamentMapper.toDto(tournaments);
     }
 
-    @RequestMapping(value = API_PREFIX + "tournament/{tournamentUuid}",
+    @RequestMapping(
+            value = API_PREFIX + "tournament/{tournamentUuid}",
             method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     TournamentDto getTournament(@PathVariable String tournamentUuid, HttpServletResponse response) {
@@ -69,7 +76,8 @@ public class TournamentController {
         return dto;
     }
 
-    @RequestMapping(value = API_PREFIX + "tournament/{tournamentUuid}/results",
+    @RequestMapping(
+            value = API_PREFIX + "tournament/{tournamentUuid}/results",
             method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<TournamentResultDto> getResults(@PathVariable String tournamentUuid, HttpServletResponse response) {
@@ -83,5 +91,15 @@ public class TournamentController {
             }
         }
         return TournamentResultMapper.toDto(results);
+    }
+
+    @RequestMapping(
+            value = API_PREFIX + "tournament",
+            method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    public @ResponseBody TournamentDto startTournament(@RequestBody TournamentDto tournamentDto) {
+        log.debug("REST request to create tournament for event: '{}'", tournamentDto.getEventUuid());
+        Tournament tournament = tournamentService.createTournament(tournamentDto);
+        return TournamentMapper.toDto(tournament);
+
     }
 }

@@ -18,6 +18,8 @@ public class TournamentDto {
 
     private int round;
 
+    private int ante;
+
     private int status;
 
     private String resultSubmittedByPlayerUuid;
