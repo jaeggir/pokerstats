@@ -1,5 +1,7 @@
 <div class="row">
-    <div class="col-md-12">
+
+    <div class="col-md-4">
+
         <h3>{{venue.name}}</h3>
 
         <address>
@@ -7,6 +9,21 @@
             {{venue.zip}} {{venue.city}}
             <span data-ng-if="venue.country !== 'CH'">{{venue.country}}</span>
         </address>
+
+        <br>
+        <h4>Poker-Nights @ {{venue.name}}</h4>
+
+        <small data-ng-if="events.length === 0">Es wurden noch keine Poker-Nights gefunden.</small>
+
+        <ul data-ng-repeat="event in events | orderBy:'-date'">
+            <li>
+                <a data-ng-href="#/event/{{event.uuid}}">{{event.name}} ({{event.date | defaultDateWithWeekday}})</a>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="col-md-8">
 
         <gm-map gm-map-id="'venueMap'" class="venueMap">
 
@@ -19,4 +36,5 @@
         </gm-map>
 
     </div>
+
 </div>

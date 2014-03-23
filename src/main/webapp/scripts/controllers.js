@@ -194,10 +194,12 @@ controllers.controller('VenuesController', function VenuesController($scope, Ven
 
 });
 
-controllers.controller('VenueController', function VenueController($scope, $routeParams, Venue, angulargmContainer) {
+controllers.controller('VenueController', function VenueController($scope, $routeParams, Venue, Events,
+                                                                   angulargmContainer) {
 
     $scope.venue = {};
     $scope.venues = []; // for the markers
+    $scope.events = [];
 
     var gmapPromise = angulargmContainer.getMapPromise('venueMap');
     gmapPromise.then(function (gmap) {
@@ -215,6 +217,14 @@ controllers.controller('VenueController', function VenueController($scope, $rout
             $scope.$broadcast('gmMarkersUpdate', 'venues');
         });
 
+    });
+
+    Events.query().$promise.then(function (events) {
+        angular.forEach(events, function (event) {
+            if (event.venueUuid === $routeParams.uuid) {
+                $scope.events.push(event);
+            }
+        });
     });
 
 });
