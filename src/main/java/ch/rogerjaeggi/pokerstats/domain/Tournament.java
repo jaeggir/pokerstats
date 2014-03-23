@@ -39,15 +39,6 @@ public class Tournament extends BaseEntity {
     @Column(name = "_RESULT_SUBMITTED_BY", updatable = false, insertable = false)
     private String resultSubmittedByPlayerUuid;
 
-    /*@Column(name = "_CURRENT_TIME")
-    private Integer currentTime;
-
-    @Column(name = "currentLevel")
-    private Integer currentLevel;
-
-    @Column(name = "currentLevelTime")
-    private Integer currentLevelTime;*/
-
     @Column(name = "_UPDATED", insertable = false, updatable = false)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     @Generated(GenerationTime.ALWAYS)
