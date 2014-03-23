@@ -33,7 +33,7 @@ controllers.controller('PlayersController', function PlayersController($scope, $
     $scope.addPlayer = function () {
 
         var modalInstance = $modal.open({
-            templateUrl: 'myModalContent.html',
+            templateUrl: 'playerModal.html',
             controller: ModalInstanceCtrl
         });
 
@@ -223,7 +223,7 @@ controllers.controller('EventsController', function EventsController($scope, $mo
     $scope.addEvent = function () {
 
         var modalInstance = $modal.open({
-            templateUrl: 'myModalContent.html',
+            templateUrl: 'eventModal.html',
             controller: ModalInstanceCtrl,
             resolve: {
                 players: function () {
