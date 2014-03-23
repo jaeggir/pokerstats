@@ -11,7 +11,7 @@ create table T_EVENT (
     _NAME varchar(255),
     _HOST varchar(255),
     _SEASON varchar(255),
-    _UPDATED timestamp,
+    _UPDATED timestamp default CURRENT_TIMESTAMP,
     _VENUE varchar(255),
     primary key (_UUID)
 );
@@ -22,7 +22,7 @@ create table T_PLAYER (
     _GUEST boolean,
     _JOINED date,
     _NICKNAME varchar(255),
-    _UPDATED timestamp,
+    _UPDATED timestamp default CURRENT_TIMESTAMP,
     primary key (_UUID)
 );
 
@@ -32,7 +32,7 @@ create table T_TOURNAMENT (
     _RESULT_SUBMITTED_BY varchar(255),
     _ROUND integer,
     _STATUS integer,
-    _UPDATED timestamp,
+    _UPDATED timestamp default CURRENT_TIMESTAMP,
     primary key (_UUID)
 );
 
@@ -45,7 +45,7 @@ create table T_TOURNAMENT_RESULT (
     _ANTE integer,
     _WIN integer,
     _TOURNAMENT varchar(255),
-    _UPDATED timestamp,
+    _UPDATED timestamp default CURRENT_TIMESTAMP,
     primary key (_UUID)
 );
 
@@ -58,7 +58,7 @@ create table T_VENUE (
     _LONGITUDE numeric,
     _NAME varchar(255),
     _STREET varchar(255),
-    _UPDATED timestamp,
+    _UPDATED timestamp default CURRENT_TIMESTAMP,
     _ZIP integer,
     primary key (_UUID)
 );

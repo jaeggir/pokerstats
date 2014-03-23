@@ -47,7 +47,7 @@ public class Event extends BaseEntity {
     @OneToMany(mappedBy = "eventUuid")
     private List<Tournament> tournaments;
 
-    @Column(name = "_UPDATED")
+    @Column(name = "_UPDATED", updatable = false, insertable = false)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime updated;
 

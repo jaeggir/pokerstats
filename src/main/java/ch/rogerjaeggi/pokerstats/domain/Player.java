@@ -30,7 +30,7 @@ public class Player extends BaseEntity {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate joined;
 
-    @Column(name = "_UPDATED")
+    @Column(name = "_UPDATED", updatable = false, insertable = false)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime updated;
 

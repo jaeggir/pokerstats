@@ -3,7 +3,6 @@ package ch.rogerjaeggi.pokerstats.web.rest.mapper;
 import ch.rogerjaeggi.pokerstats.domain.Player;
 import ch.rogerjaeggi.pokerstats.web.rest.dto.PlayerDto;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -35,7 +34,6 @@ public class PlayerMapper {
         player.setGuest(dto.isGuest());
         player.setBirthday(new LocalDate(dto.getBirthday()));
         player.setJoined(LocalDate.now());
-        player.setUpdated(LocalDateTime.now());
         return player;
     }
 }
