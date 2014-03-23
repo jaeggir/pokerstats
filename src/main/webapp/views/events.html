@@ -2,11 +2,14 @@
     <div class="col-md-12">
         <h2>Poker-Nights</h2>
         <br>
+
         <div data-ng-repeat="season in seasons | orderBy:'-name'">
             <strong>{{season.name}}</strong>
-            <ul data-ng-repeat="event in events | orderBy:'-date'">
-                <li data-ng-if="event.seasonUuid === season.uuid">
-                    <a data-ng-href="#/event/{{event.uuid}}">{{event.name}} ({{event.date | defaultDateWithWeekday}})</a>
+            <ul data-ng-repeat="event in season.events | orderBy:'-date'">
+                <li>
+                    <a data-ng-href="#/event/{{event.uuid}}">
+                        {{event.name}} ({{event.date | defaultDateWithWeekday}})
+                    </a>
                 </li>
             </ul>
         </div>

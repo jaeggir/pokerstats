@@ -39,12 +39,16 @@ public class EventController {
 
     @RequestMapping(value = API_PREFIX + "event", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    List<EventDto> getEvents(@RequestParam(value = "venueUuid", required = false) String venueUuid) {
+    List<EventDto> getEvents(@RequestParam(value = "venueUuid", required = false) String venueUuid,
+                             @RequestParam(value = "seasonUuid", required = false) String seasonUuid) {
 
         List<Event> events;
         if (venueUuid != null) {
             log.debug("REST request to get all  with venueUuid='{}'", venueUuid);
             events = eventRepository.getByVenueUuid(venueUuid);
+        } else if (seasonUuid != null) {
+            log.debug("REST request to get all  with seasonUuid='{}'", seasonUuid);
+            events = eventRepository.getBySeasonUuid(seasonUuid);
         } else {
             log.debug("REST request to get all events");
             events = eventRepository.getAll();
@@ -62,8 +66,8 @@ public class EventController {
         event.setSeason(seasonRepository.getByUuid("3"));
         event.setVenue(venueRepository.getByUuid(eventDto.getVenueUuid()));
         event.setHost(playerRepository.getByUuid(eventDto.getHostPlayerUuid()));
-        eventRepository.update(event);
-        return eventDto;
+        event = eventRepository.update(event);
+        return EventMapper.toDto(event, null);
     }
 
     @RequestMapping(value = API_PREFIX + "event/{uuid}", method = RequestMethod.GET, produces = "application/json")

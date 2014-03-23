@@ -14,7 +14,7 @@ public class EventRepository extends JpaRepository<Event> {
         super(Event.class);
     }
 
-    public List<Event> getBySeason(String seasonUuid) {
+    public List<Event> getBySeasonUuid(String seasonUuid) {
         Query query = getEntityManager().createQuery("from Event where season.uuid=:seasonUuid");
         query.setParameter("seasonUuid", seasonUuid);
         return Collections.checkedList(query.getResultList(), Event.class);

@@ -194,8 +194,16 @@ controllers.controller('VenueController', function VenueController($scope, $rout
 
 controllers.controller('EventsController', function EventsController($scope, $modal, Seasons, Events, Players, Venues) {
 
-    $scope.seasons = Seasons.query();
-    $scope.events = Events.query();
+    $scope.currentSeason = null;
+    Seasons.query().$promise.then(function (seasons) {
+        $scope.seasons = seasons;
+        angular.forEach(seasons, function (season) {
+            if (season.current) {
+                $scope.currentSeason = season;
+            }
+            season.events = Events.query({seasonUuid: season.uuid});
+        });
+    });
     $scope.players = Players.query();
     $scope.venues = Venues.query();
 
@@ -215,8 +223,7 @@ controllers.controller('EventsController', function EventsController($scope, $mo
         });
 
         modalInstance.result.then(function (event) {
-            // FIX is not updated..
-            $scope.events.push(event);
+            $scope.currentSeason.events.push(event);
         }, function () {
             console.log('Modal dismissed at: ' + new Date());
         });

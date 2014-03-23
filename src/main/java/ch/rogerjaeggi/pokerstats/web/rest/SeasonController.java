@@ -69,7 +69,7 @@ public class SeasonController {
 
     private List<String> getEventUuids(String seasonUuid) {
         // TODO map, Java8?
-        List<Event> events = eventRepository.getBySeason(seasonUuid);
+        List<Event> events = eventRepository.getBySeasonUuid(seasonUuid);
         List<String> eventUuids = new LinkedList<>();
         for (Event event : events) {
             eventUuids.add(event.getUuid());
