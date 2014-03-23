@@ -20,6 +20,7 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/angular-sanitize/angular-sanitize.js',
             'src/main/webapp/scripts/*.js',
             'src/main/webapp/scripts/**/*.js',
+            'src/main/webapp/scripts/controllers/*.js',
             'src/test/javascript/**/!(karma.conf).js'
         ],
 
