@@ -267,13 +267,7 @@ controllers.controller('TournamentController', function TournamentController($sc
     $scope.results = [];
     Tournament.get({uuid: $routeParams.uuid}).$promise.then(function (tournament) {
         $scope.tournament = tournament;
-        TournamentResults.query({uuid: tournament.uuid}).$promise.then(function (results) {
-            angular.forEach(results, function (result) {
-                if (result.tournamentUuid === $scope.tournament.uuid) {
-                    $scope.results.push(result);
-                }
-            });
-        });
+        $scope.results = TournamentResults.query({uuid: tournament.uuid});
     });
 
 });
