@@ -15,7 +15,7 @@ controllers.controller('MainController', function MainController($scope, Seasons
     });
 });
 
-controllers.controller('PlayersController', function PlayersController($scope, $modal, Players) {
+controllers.controller('PlayersController', function PlayersController($scope, $modal, $filter, Players) {
 
     $scope.players = {};
     Players.query().$promise.then(function (players) {
@@ -46,10 +46,29 @@ controllers.controller('PlayersController', function PlayersController($scope, $
 
     var ModalInstanceCtrl = function ($scope, $modalInstance, Players) {
         $scope.player = new Players();
+        $scope.birthday = null;
+
+        /* DATE-PICKER STUFF */
+        /*********************/
+
+        $scope.open = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened = true;
+        };
+
+        $scope.maxDate = new Date();
+
+        $scope.dateOptions = {
+            'starting-day': 1
+        };
+
+        /* END DATE-PICKER STUFF */
+        /*************************/
 
         $scope.ok = function () {
-            // FIX hack..
-            $scope.player.birthday = new Date($scope.player.birthday).getTime();
+            $scope.player.birthday = new Date(this.birthday).getTime();
             $scope.player.$save(function (player) {
                 $modalInstance.close(player);
             });
@@ -248,9 +267,26 @@ controllers.controller('EventsController', function EventsController($scope, $mo
         $scope.players = players;
         $scope.venues = venues;
 
+        $scope.date = null;
+
+        /* DATE-PICKER STUFF */
+        /*********************/
+
+        $scope.open = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened = true;
+        };
+
+        $scope.minDate = new Date();
+
+        $scope.dateOptions = {
+            'starting-day': 1
+        };
+
         $scope.ok = function () {
-            // FIX hack..
-            $scope.event.date = new Date($scope.event.date).getTime();
+            $scope.event.date = new Date(this.date).getTime();
             $scope.event.$save(function (event) {
                 $modalInstance.close(event);
             });

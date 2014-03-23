@@ -51,7 +51,16 @@
             <div class="form-group">
                 <label class="control-label col-md-4" for="birthday">Geburtsdatum</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="birthday" data-ng-model="player.birthday">
+                    <p class="input-group">
+                        <input type="text" id="birthday" class="form-control" datepicker-popup
+                               ng-model="birthday" is-open="$parent.opened" max="maxDate" date-type="string"
+                               datepicker-options="dateOptions" show-button-bar="false" placeholder="zB. 1981-08-14" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" ng-click="open($event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
                 </div>
             </div>
             <div class="form-group">

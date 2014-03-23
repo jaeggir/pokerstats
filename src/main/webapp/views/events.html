@@ -36,7 +36,16 @@
             <div class="form-group">
                 <label class="control-label col-md-4" for="date">Datum</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="date" data-ng-model="event.date">
+                    <p class="input-group">
+                        <input type="text" id="date" class="form-control" datepicker-popup
+                               ng-model="date" is-open="$parent.opened" min="minDate" date-type="string"
+                               datepicker-options="dateOptions" show-button-bar="false" placeholder="zB. 2014-03-12" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" ng-click="open($event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
                 </div>
             </div>
 
