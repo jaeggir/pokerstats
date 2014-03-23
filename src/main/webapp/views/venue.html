@@ -8,8 +8,7 @@
             <span data-ng-if="venue.country !== 'CH'">{{venue.country}}</span>
         </address>
 
-        <gm-map gm-map-id="'venueMap'" gm-center="mapCenter" class="venueMap"
-                gm-map-options="mapOptions">
+        <gm-map gm-map-id="'venueMap'" class="venueMap">
 
             <gm-markers gm-objects="venues"
                         gm-id="object.uuid"

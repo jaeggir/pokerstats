@@ -71,7 +71,7 @@ controllers.controller('PlayerController', function PlayersController($scope, $r
     });
 
     $scope.results = [];
-    $scope.averageRank;
+    $scope.averageRank = null;
     $scope.averageWin = 0;
     PlayerResults.query({uuid: $routeParams.uuid}).$promise.then(function (results) {
 
@@ -134,56 +134,69 @@ controllers.controller('EventController', function EventController($scope, $rout
 
 });
 
-controllers.controller('VenuesController', function VenuesController($scope, Venues) {
+controllers.controller('VenuesController', function VenuesController($scope, Venues, angulargmContainer) {
 
     $scope.venues = [];
-    $scope.bounds = new google.maps.LatLngBounds();
+    var gMapInstance = null;
 
-    $scope.mapOptions = {
-        zoom: 11,
-        mapTypeId: google.maps.MapTypeId.ROAD
-    };
-    $scope.mapCenter = new google.maps.LatLng(47.5, 8.53);
+    var gMapPromise = angulargmContainer.getMapPromise('venuesMap');
+    gMapPromise.then(function (gMap) {
+
+        gMapInstance = gMap;
+
+        gMap.setCenter(new google.maps.LatLng(47.5, 8.53));
+        gMap.setZoom(12);
+        gMap.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+
+        var bounds = new google.maps.LatLngBounds();
+
+        Venues.query().$promise.then(function (venues) {
+            $scope.venues = venues;
+
+            angular.forEach(venues, function (venue) {
+                bounds.extend(new google.maps.LatLng(venue.latitude, venue.longitude));
+            });
+
+            var center = bounds.getCenter();
+            gMap.setCenter(new google.maps.LatLng(center.k, center.A));
+
+            $scope.$broadcast('gmMarkersUpdate', 'venues');
+        });
+
+    });
 
     $scope.centerToMarkerAndOpenInfoWindow = function (venue) {
         // FIX open info window
-        $scope.mapCenter = new google.maps.LatLng(venue.latitude, venue.longitude);
+        gMapInstance.setCenter(new google.maps.LatLng(venue.latitude, venue.longitude));
         $scope.markerEvents = [{
             event: 'openinfowindow',
             ids: [venue.uuid]
         }];
     };
 
-    Venues.query().$promise.then(function (venues) {
-        $scope.venues = venues;
-        angular.forEach(venues, function (venue) {
-            $scope.bounds.extend(new google.maps.LatLng(venue.latitude, venue.longitude));
-        });
-        var center = $scope.bounds.getCenter();
-        $scope.mapCenter = new google.maps.LatLng(center.k, center.A);
-        $scope.$broadcast('gmMarkersUpdate', 'venues');
-    });
-
 });
 
-controllers.controller('VenueController', function VenueController($scope, $routeParams, Venue) {
+controllers.controller('VenueController', function VenueController($scope, $routeParams, Venue, angulargmContainer) {
 
     $scope.venue = {};
     $scope.venues = []; // for the markers
 
-    $scope.mapOptions = {
-        zoom: 14,
-        mapTypeId: google.maps.MapTypeId.ROAD
-    };
-    $scope.mapCenter = new google.maps.LatLng(47.5, 8.53);
+    var gmapPromise = angulargmContainer.getMapPromise('venueMap');
+    gmapPromise.then(function (gmap) {
 
-    Venue.get({uuid: $routeParams.uuid}).$promise.then(function (venue) {
-        $scope.venue = venue;
+        gmap.setCenter(new google.maps.LatLng(47.5, 8.53));
+        gmap.setZoom(14);
+        gmap.setMapTypeId(google.maps.MapTypeId.ROADMAP);
 
-        $scope.venues.push(venue);
-        $scope.mapCenter = new google.maps.LatLng(venue.latitude, venue.longitude);
+        Venue.get({uuid: $routeParams.uuid}).$promise.then(function (venue) {
+            $scope.venue = venue;
+            $scope.venues.push(venue);
 
-        $scope.$broadcast('gmMarkersUpdate', 'venues');
+            gmap.setCenter(new google.maps.LatLng(venue.latitude, venue.longitude));
+
+            $scope.$broadcast('gmMarkersUpdate', 'venues');
+        });
+
     });
 
 });
