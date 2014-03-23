@@ -25,7 +25,6 @@
         "document": false,
         "localStorage": false,
         "google": false,
-        "moment": false,
         "d3": false,
         "Math": false
     }

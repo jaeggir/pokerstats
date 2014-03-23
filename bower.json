@@ -10,7 +10,6 @@
     "angular-resource": "1.2.14",
     "angular-cookies": "1.2.14",
     "angular-sanitize": "1.2.14",
-    "momentjs": "~2.5.1",
     "angularjs-nvd3-directives": "~0.0.5-beta",
     "AngularGM": "~1.0.0",
     "angular-ui-bootstrap-bower": "0.10.0",
