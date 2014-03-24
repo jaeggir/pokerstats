@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Pokerstats</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
@@ -28,28 +28,32 @@
 
         <div class="container">
 
-            <div class="navbar navbar-default" role="navigation" data-navbar>
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand logo-nav" href="/#">
-                            <img src="images/poker_cards.png"> PokerStats
-                        </a>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li data-match-route="/event.*"><a href="#/events">Poker-Nights</a></li>
-                            <li data-match-route="/venue.*"><a href="#/venues">Lokalitäten</a></li>
-                            <li data-match-route="/players"><a href="#/players">Spieler</a>
-                        </ul>
-                    </div>
+            <nav class="navbar navbar-default" role="navigation">
+
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+
+                    <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand logo-nav hidden-xs" href="/#">
+                        <img src="images/poker_cards.png"> PokerStats
+                    </a>
+                    <a class="navbar-brand visible-xs" href="/#">PokerStats</a>
                 </div>
-            </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'" ng-click="navCollapsed=true">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li data-match-route="/event.*"><a href="#/events">Poker-Nights</a></li>
+                        <li data-match-route="/venue.*"><a href="#/venues">Lokalitäten</a></li>
+                        <li data-match-route="/players"><a href="#/players">Spieler</a></li>
+                    </ul>
+                </div>
+            </nav>
 
             <div class="jumbotron">
                 <div data-ng-view></div>
@@ -81,6 +85,7 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/EventCtrl.js"></script>
         <script src="scripts/controllers/EventsCtrl.js"></script>
+        <script src="scripts/controllers/MainCtrl.js"></script>
         <script src="scripts/controllers/PlayerCtrl.js"></script>
         <script src="scripts/controllers/PlayersCtrl.js"></script>
         <script src="scripts/controllers/TournamentCtrl.js"></script>
