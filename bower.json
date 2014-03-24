@@ -4,12 +4,12 @@
   "appPath": "src/main/webapp",
   "dependencies": {
     "bootstrap": "3.1.1",
-    "jquery": "2.1.0",
-    "angular": "1.2.14",
-    "angular-route": "1.2.14",
-    "angular-resource": "1.2.14",
-    "angular-cookies": "1.2.14",
-    "angular-sanitize": "1.2.14",
+    "jquery": "1.11.0",
+    "angular": "1.2.15",
+    "angular-route": "1.2.15",
+    "angular-resource": "1.2.15",
+    "angular-cookies": "1.2.15",
+    "angular-sanitize": "1.2.15",
     "angularjs-nvd3-directives": "~0.0.5-beta",
     "AngularGM": "~1.0.0",
     "angular-ui-bootstrap-bower": "0.10.0",
@@ -17,11 +17,11 @@
     "angular-ui-select2": "~0.0.5"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.14",
-    "angular-scenario": "1.2.14"
+    "angular-mocks": "1.2.15",
+    "angular-scenario": "1.2.15"
   },
   "resolutions": {
     "d3": "3.3.11",
-    "angular": "1.2.14"
+      "angular": "1.2.15"
   }
 }
