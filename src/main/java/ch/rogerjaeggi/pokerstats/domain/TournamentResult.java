@@ -33,9 +33,6 @@ public class TournamentResult extends BaseEntity {
     @Column(name = "_RANK")
     private Integer rank;
 
-    @Column(name = "_POINTS")
-    private Integer points;
-
     @Column(name = "_ANTE")
     private Integer ante;
 

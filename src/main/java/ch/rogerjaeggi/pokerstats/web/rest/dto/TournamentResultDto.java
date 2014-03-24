@@ -18,8 +18,6 @@ public class TournamentResultDto {
 
     private Integer rank;
 
-    private Integer points;
-
     private String eliminatedByPlayerUuid;
 
     private long updated;

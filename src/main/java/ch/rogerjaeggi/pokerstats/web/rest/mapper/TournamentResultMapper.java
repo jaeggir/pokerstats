@@ -23,7 +23,6 @@ public class TournamentResultMapper {
         dto.setUpdated(result.getUpdated().toDateTime().getMillis());
         dto.setEliminatedByPlayerUuid(result.getEliminatedByPlayerUuid());
         dto.setPlayerUuid(result.getPlayerUuid());
-        dto.setPoints(result.getPoints());
         dto.setRank(result.getRank());
         dto.setTournamentUuid(result.getTournamentUuid());
         dto.setAnte(result.getAnte());

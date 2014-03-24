@@ -40,7 +40,6 @@ create table T_TOURNAMENT_RESULT (
     _UUID varchar(255) not null,
     _ELIMINATED_BY varchar(255),
     _PLAYER varchar(255),
-    _POINTS integer,
     _RANK integer,
     _ANTE integer,
     _WIN integer,
