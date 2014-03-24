@@ -6,12 +6,13 @@
 
         <div data-ng-if="tournament.status === 0">
             <h4>Noch dabei:</h4>
-            <ul data-ng-repeat="result in results | onlyActivePlayers" class="list-group">
+            <ul data-ng-repeat="player in playersInTheGame" class="list-group">
                 <li class="list-group-item">
-                    {{result.uuid}}
+                    {{player.uuid}}
                     <div class="pull-right action-buttons">
                         <div class="btn-group pull-right">
-                            <button type="button" class="btn btn-default btn-xs" data-ng-click="killPlayer(result.uuid)">
+                            <button type="button" class="btn btn-default btn-xs"
+                                    data-ng-click="openEliminatePlayerModal(player.uuid)">
                                 <span class="glyphicon glyphicon-remove" style="margin-right: 0px;"></span>
                             </button>
                         </div>
@@ -20,17 +21,83 @@
             </ul>
 
             <h4>Eliminiert:</h4>
-            <ul data-ng-repeat="result in results | onlyEliminatedPlayers" class="list-group">
+            <ul data-ng-repeat="player in playersEliminated" class="list-group">
                 <li class="list-group-item">
-                    {{result.uuid}}
+                    {{player.uuid}}
                 </li>
             </ul>
+
+            <button class="btn btn-primary" data-ng-click="endGame()">Spiel beenden</button>
+
         </div>
         <div data-ng-if="tournament.status === 1">
             <h4>Rangliste</h4>
-            <div data-ng-repeat="result in results | orderBy:'rank'">
-                {{result.rank}}. Rang: <a data-ng-href="#/player/{{player.uuid}}">{{player.nickname}}</a> ({{result.points}} Punkte)<br>
+            <div data-ng-repeat="player in players | orderBy:'rank'">
+                {{player.rank}}. Rang: <a data-ng-href="#/player/{{player.uuid}}">{{player.playerUuid}}</a> ({{player.win}} CHF)
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/ng-template" id="eliminatePlayer.html">
+    <div class="modal-header">
+        <h3>Spieler elimnieren</h3>
+    </div>
+    <div class="modal-body">
+
+        <form class="form-horizontal" name="commentform" method="post">
+
+            <div class="form-group">
+                <label class="control-label col-md-4" for="rank">Rang</label>
+                <div class="col-md-6">
+                    <input type="number" min="1" max="100" class="form-control" data-ng-model="player.rank" id="rank">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-4" for="ante">Einsatz</label>
+                <div class="col-md-6">
+                    <p class="input-group">
+                        <input type="number" min="0" class="form-control" data-ng-model="player.ante" id="ante">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default">
+                                <i class="glyphicon glyphicon-usd"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-4" for="win">Gewinn</label>
+                <div class="col-md-6">
+                    <p class="input-group">
+                        <input type="number" min="0" class="form-control" data-ng-model="player.win" id="win">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default">
+                                <i class="glyphicon glyphicon-usd"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-4" for="eliminatedByPlayerUuid">Getötet von</label>
+                <div class="col-md-6">
+                    <select data-ui-select2 data-ng-model="player.eliminatedByPlayerUuid" id="eliminatedByPlayerUuid" style="width: 100%">
+                        <option data-ng-repeat="player in playersInTheGame" value="{{player.playerUuid}}">
+                            {{player.playerUuid}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" data-ng-click="ok()">Speichern</button>
+        <button class="btn btn-warning" data-ng-click="cancel()">Abbrechen</button>
+    </div>
+</script>

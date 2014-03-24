@@ -6,6 +6,7 @@ import ch.rogerjaeggi.pokerstats.repository.PlayerRepository;
 import ch.rogerjaeggi.pokerstats.repository.TournamentRepository;
 import ch.rogerjaeggi.pokerstats.repository.TournamentResultRepository;
 import ch.rogerjaeggi.pokerstats.web.rest.dto.TournamentDto;
+import ch.rogerjaeggi.pokerstats.web.rest.dto.TournamentResultDto;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -61,5 +62,29 @@ public class TournamentService {
             }
         }
         return round + 1;
+    }
+
+    public TournamentResult updateResult(TournamentResultDto dto) {
+        TournamentResult result = tournamentResultRepository.getByUuid(dto.getUuid());
+        if (dto.getEliminatedByPlayerUuid() != null) {
+            Player player = playerRepository.getByUuid(dto.getEliminatedByPlayerUuid());
+            if (player == null) {
+                throw new RuntimeException("Unknown player uuid: '" + dto.getEliminatedByPlayerUuid() + "'.");
+            }
+            result.setEliminatedBy(player);
+        }
+        result.setWin(dto.getWin());
+        result.setRank(dto.getRank());
+        result = tournamentResultRepository.update(result);
+        return result;
+    }
+
+    public Tournament endTournament(String tournamentUuid) {
+        Tournament tournament = tournamentRepository.getByUuid(tournamentUuid);
+        if (tournament == null) {
+            throw new RuntimeException("Unknown tournament uuid: '" + tournamentUuid + "'.");
+        }
+        tournament.setStatus(TournamentStatus.FINISHED.getId());
+        return tournamentRepository.update(tournament);
     }
 }

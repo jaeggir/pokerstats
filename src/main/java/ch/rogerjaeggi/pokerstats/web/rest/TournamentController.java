@@ -102,4 +102,29 @@ public class TournamentController {
         return TournamentMapper.toDto(tournament);
 
     }
+
+    @RequestMapping(
+            value = API_PREFIX + "tournament/{tournamentUuid}/result/{resultUuid}",
+            method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    public @ResponseBody TournamentResultDto eliminatePlayer(@PathVariable String tournamentUuid,
+                                                             @PathVariable String resultUuid,
+                                                             @RequestBody TournamentResultDto dto) {
+
+        log.debug("REST request to eliminate player result '{}' for event '{}'", resultUuid, tournamentUuid);
+        if (!tournamentUuid.equals(dto.getTournamentUuid()) || !resultUuid.equals(dto.getUuid())) {
+            throw new RuntimeException("tournamentUuid and/or resultUuid did not match with values in body.");
+        }
+        TournamentResult result = tournamentService.updateResult(dto);
+        return TournamentResultMapper.toDto(result);
+    }
+
+    @RequestMapping(
+            value = API_PREFIX + "tournament/{tournamentUuid}",
+            method = RequestMethod.PUT, produces = "application/json")
+    public @ResponseBody TournamentDto endTournament(@PathVariable String tournamentUuid) {
+
+        log.debug("REST request to end tournament '{}' for event '{}'", tournamentUuid);
+        Tournament result = tournamentService.endTournament(tournamentUuid);
+        return TournamentMapper.toDto(result);
+    }
 }
